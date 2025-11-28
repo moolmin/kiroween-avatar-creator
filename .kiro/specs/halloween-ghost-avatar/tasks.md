@@ -117,7 +117,7 @@
   - **Property 14: Component layering order is correct**
   - **Validates: Requirements 11.2**
 
-- [ ] 11. Create SelectControl component for dropdowns
+- [x] 11. Create SelectControl component for dropdowns
   - Create components/controls/SelectControl.tsx
   - Use Headless UI Listbox for accessible dropdown
   - Accept options array and onChange handler
