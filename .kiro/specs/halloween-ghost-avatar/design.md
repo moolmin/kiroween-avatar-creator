@@ -334,19 +334,17 @@ The avatar configuration represents the current state of all customization optio
 
 ```typescript
 interface AvatarConfiguration {
-  // Facial features
+  // Eyes
   eyes: string;           // ID of selected eye variant
-  mouth: string;          // ID of selected mouth variant
-  eyebrows: string;       // ID of selected eyebrow variant
-  blush: boolean;         // Whether blush is enabled
   
-  // Body
-  body: string;           // ID of selected body variant
+  // Hat (nullable - can be removed)
+  hat: string | null;     // ID of selected hat or null
   
-  // Accessories (nullable - can be "none")
-  hat: string | null;           // ID of selected hat or null
-  leftHandItem: string | null;  // ID of left hand item or null
-  rightHandItem: string | null; // ID of right hand item or null
+  // Cape
+  cape: string;           // ID of selected cape variant
+  
+  // Accessory (nullable - can be removed)
+  accessory: string | null;  // ID of selected accessory or null
   
   // Background
   background: string;     // ID of selected background
@@ -375,101 +373,100 @@ All SVG components use a consistent 1024x1024 viewBox coordinate system:
 
 - **Origin**: Top-left corner (0, 0)
 - **Dimensions**: 1024 x 1024 units
-- **Body center**: Approximately (512, 512)
-- **Head area**: Y coordinates 200-500
-- **Body area**: Y coordinates 400-900
-- **Hand positions**: 
-  - Left hand: X ~300, Y ~600
-  - Right hand: X ~724, Y ~600
+- **Ghost center**: Approximately (512, 512)
+- **Eyes area**: Y coordinates 350-450
+- **Hat area**: Y coordinates 150-350
+- **Cape area**: Y coordinates 400-900
+- **Accessory position**: X ~400-600, Y ~600-800
 
 ## Correctness Properties
 
 *A property is a characteristic or behavior that should hold true across all valid executions of a system—essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
 
 
-### Property 1: Facial feature selection renders correct component
+### Property 1: Eye selection renders correct component
 
-*For any* valid facial feature option (eyes, mouth, or eyebrows) from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding component.
+*For any* valid eye option from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding eye component.
 
-**Validates: Requirements 1.1, 1.2, 1.3**
+**Validates: Requirements 1.1**
 
-### Property 2: Blush toggle controls visibility
+### Property 2: Hat selection renders correct component
 
-*For any* avatar configuration, toggling the blush option from false to true should add blush effects to the rendered avatar, and toggling from true to false should remove them.
-
-**Validates: Requirements 1.4**
-
-### Property 3: Body selection renders correct variant
-
-*For any* valid body variant from the component registry, when that variant is selected in the avatar configuration, the rendered SVG should contain the corresponding body component with its pre-designed colors and patterns.
+*For any* valid hat option from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding hat component.
 
 **Validates: Requirements 2.1**
 
+### Property 3: Cape selection renders correct variant
+
+*For any* valid cape variant from the component registry, when that variant is selected in the avatar configuration, the rendered SVG should contain the corresponding cape component with its pre-designed colors and patterns.
+
+**Validates: Requirements 3.1**
+
 ### Property 4: Accessory selection renders correct component
 
-*For any* valid accessory option (hat, left hand item, or right hand item) from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding accessory component.
+*For any* valid accessory option from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding accessory component.
 
-**Validates: Requirements 3.1, 3.2, 3.3**
+**Validates: Requirements 4.1**
 
 ### Property 5: Null accessory removes component
 
-*For any* accessory type (hat, left hand item, or right hand item), when the configuration value is set to null, the rendered SVG should not contain any component for that accessory type.
+*For any* nullable option (hat or accessory), when the configuration value is set to null, the rendered SVG should not contain any component for that option.
 
-**Validates: Requirements 3.4**
+**Validates: Requirements 2.2, 4.2**
 
 ### Property 6: Background selection renders correct component
 
 *For any* valid background option from the component registry, when that option is selected in the avatar configuration, the rendered SVG should contain the corresponding background component.
 
-**Validates: Requirements 4.1**
+**Validates: Requirements 5.1**
 
 ### Property 7: PNG export dimensions are correct
 
 *For any* avatar configuration, when the export function is called, the resulting PNG image should have dimensions of exactly 1024x1024 pixels.
 
-**Validates: Requirements 5.1**
+**Validates: Requirements 7.1**
 
 ### Property 8: PNG export preserves transparency
 
 *For any* avatar configuration, when exported to PNG, areas outside the avatar composition should have an alpha channel value of 0 (fully transparent).
 
-**Validates: Requirements 5.2**
+**Validates: Requirements 7.2**
 
 ### Property 9: Export filename follows pattern
 
 *For any* export operation, the generated filename should match the pattern "kiro-avatar-{timestamp}.png" where timestamp is a valid Unix timestamp in milliseconds.
 
-**Validates: Requirements 5.3**
+**Validates: Requirements 7.3**
 
 ### Property 10: Random generation produces valid configuration
 
 *For any* random generation operation, all selected options should exist in their respective component registries and form a valid avatar configuration.
 
-**Validates: Requirements 6.1, 6.4**
+**Validates: Requirements 8.1, 8.4**
 
 ### Property 11: Random generation synchronizes state
 
 *For any* random generation operation, the avatar configuration state should match the options displayed in all customization controls.
 
-**Validates: Requirements 6.2**
+**Validates: Requirements 8.2**
 
 ### Property 12: Registry extension enables component usage
 
 *For any* new component added to a category registry, that component should be available for selection and rendering in the avatar maker without modifying UI logic.
 
-**Validates: Requirements 8.1, 8.2**
+**Validates: Requirements 10.1, 10.2**
 
 ### Property 13: New category registration is functional
 
 *For any* new asset category added to the component registry system, components in that category should be selectable and renderable following the same patterns as existing categories.
 
-**Validates: Requirements 8.4**
+**Validates: Requirements 10.4**
 
 ### Property 14: Component layering order is correct
 
-*For any* avatar configuration, the rendered SVG should layer components in the correct z-order: background (layer 1), body (layer 2), facial features (layer 3), accessories (layer 4).
+*For any* avatar configuration, the rendered SVG should layer components in the correct z-order: background (layer 1), cape (layer 2), eyes (layer 3), hat (layer 4), accessory (layer 5).
 
-**Validates: Requirements 9.2**
+**Validates: Requirements 11.2**
 
 ## Error Handling
 

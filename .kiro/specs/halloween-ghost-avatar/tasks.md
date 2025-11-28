@@ -32,7 +32,7 @@
   - _Requirements: 1.1_
   - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 5. Create example SVG assets for Hats category
+- [x] 5. Create example SVG assets for Hats category
   - Create public/ghost-parts/hats directory
   - Create witch-hat.svg with witch hat design
   - Create pumpkin-hat.svg with pumpkin hat design

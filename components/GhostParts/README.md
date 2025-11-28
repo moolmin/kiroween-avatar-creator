@@ -45,30 +45,33 @@ export const registry = createSvgRegistryFromFiles('eyes', svgFiles);
 ```
 public/ghost-parts/
 ├── eyes/           # 눈 SVG 파일들
-├── mouths/         # 입 SVG 파일들
-├── eyebrows/       # 눈썹 SVG 파일들
-├── bodies/         # 몸체 SVG 파일들
 ├── hats/           # 모자 SVG 파일들
-├── handItems/      # 손에 드는 아이템 SVG 파일들
+├── capes/          # 망토 SVG 파일들
+├── accessories/    # 악세서리 SVG 파일들
 └── backgrounds/    # 배경 SVG 파일들
 
 components/GhostParts/
 ├── Eyes/
 │   └── index.ts    # SVG 파일 목록만 관리
-├── Mouths/
+├── Hats/
 │   └── index.ts
-└── ...
+├── Capes/
+│   └── index.ts
+├── Accessories/
+│   └── index.ts
+└── Backgrounds/
+    └── index.ts
 ```
 
 ## SVG 작성 가이드
 
 ### 좌표 시스템
 - viewBox: `0 0 1024 1024`
-- 중심점: (512, 512)
-- 머리 영역: Y 200-500
-- 몸체 영역: Y 400-900
-- 왼손 위치: X ~300, Y ~600
-- 오른손 위치: X ~724, Y ~600
+- 유령 중심: (512, 512)
+- 눈 영역: Y 350-450
+- 모자 영역: Y 150-350
+- 망토 영역: Y 400-900
+- 악세서리 위치: X 400-600, Y 600-800
 
 ### 예시 SVG
 
