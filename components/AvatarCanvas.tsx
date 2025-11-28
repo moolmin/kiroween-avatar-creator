@@ -17,10 +17,11 @@
 
 'use client';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { useAvatarStore } from '@/lib/avatarStore';
 import { getComponent } from '@/lib/componentRegistry';
 import { SVGComponentErrorBoundary } from './SVGComponentErrorBoundary';
+import { getComponentTransform, transformToString } from '@/lib/componentTransforms';
 
 /**
  * AvatarCanvas component props
@@ -46,6 +47,30 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
   ({ className }, ref) => {
     // Get current configuration from store
     const config = useAvatarStore((state) => state.config);
+    const [ghostBodyContent, setGhostBodyContent] = useState<string>('');
+
+    // Load the default ghost body SVG
+    useEffect(() => {
+      const loadGhostBody = async () => {
+        try {
+          const response = await fetch('/ghost-parts/kiro-body.svg');
+          const text = await response.text();
+          
+          // Parse the SVG to extract only the inner content
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, 'image/svg+xml');
+          const svgElement = doc.querySelector('svg');
+          
+          if (svgElement) {
+            setGhostBodyContent(svgElement.innerHTML);
+          }
+        } catch (error) {
+          console.error('Failed to load ghost body:', error);
+        }
+      };
+
+      loadGhostBody();
+    }, []);
 
     // Retrieve components from registry based on current configuration
     const BackgroundComponent = getComponent('backgrounds', config.background);
@@ -87,31 +112,47 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 2: Cape */}
+        {/* Layer 2: Ghost Body (Default) */}
+        {ghostBodyContent && (
+          <g 
+            dangerouslySetInnerHTML={{ __html: ghostBodyContent }}
+            transform={transformToString(getComponentTransform('ghostBody'))}
+          />
+        )}
+
+        {/* Layer 3: Cape */}
         {CapeComponent && (
           <SVGComponentErrorBoundary componentName={`cape-${config.cape}`}>
-            <CapeComponent />
+            <g transform={transformToString(getComponentTransform('capes', config.cape))}>
+              <CapeComponent />
+            </g>
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 3: Eyes */}
+        {/* Layer 4: Eyes */}
         {EyesComponent && (
           <SVGComponentErrorBoundary componentName={`eyes-${config.eyes}`}>
-            <EyesComponent />
+            <g transform={transformToString(getComponentTransform('eyes', config.eyes))}>
+              <EyesComponent />
+            </g>
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 4: Hat */}
-        {HatComponent && (
+        {/* Layer 5: Hat */}
+        {HatComponent && config.hat && (
           <SVGComponentErrorBoundary componentName={`hat-${config.hat}`}>
-            <HatComponent />
+            <g transform={transformToString(getComponentTransform('hats', config.hat))}>
+              <HatComponent />
+            </g>
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 5: Accessory */}
-        {AccessoryComponent && (
+        {/* Layer 6: Accessory */}
+        {AccessoryComponent && config.accessory && (
           <SVGComponentErrorBoundary componentName={`accessory-${config.accessory}`}>
-            <AccessoryComponent />
+            <g transform={transformToString(getComponentTransform('accessories', config.accessory))}>
+              <AccessoryComponent />
+            </g>
           </SVGComponentErrorBoundary>
         )}
       </svg>

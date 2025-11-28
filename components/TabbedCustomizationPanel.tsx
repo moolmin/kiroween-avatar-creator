@@ -30,17 +30,20 @@ interface CustomizationPanelProps {
   className?: string;
 }
 
+// Dummy component for "None" option
+const NoneComponent = () => null;
+
 export default function TabbedCustomizationPanel({ className = '' }: CustomizationPanelProps) {
   const [activeTab, setActiveTab] = useState<string>('eyes');
   const { config, updateConfig, randomize } = useAvatarStore();
 
   const renderOptionButton = (category: string, option: ComponentRegistryEntry, isNoneOption: boolean = false) => {
     // Map plural category names to singular config keys
-    const configKey = category === 'hats' ? 'hat' : 
+    const configKey = (category === 'hats' ? 'hat' : 
                       category === 'capes' ? 'cape' :
                       category === 'accessories' ? 'accessory' :
                       category === 'backgrounds' ? 'background' : 
-                      category;
+                      category) as keyof typeof config;
     
     const isSelected = isNoneOption 
       ? (!config[configKey] || config[configKey] === 'none' || config[configKey] === null)
@@ -95,7 +98,7 @@ export default function TabbedCustomizationPanel({ className = '' }: Customizati
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 p-4">
         {/* Add "none" option for optional categories */}
         {isOptionalCategory && (
-          renderOptionButton(activeTab, { id: 'none', label: 'None', component: null } as ComponentRegistryEntry, true)
+          renderOptionButton(activeTab, { id: 'none', label: 'None', component: NoneComponent }, true)
         )}
         {/* Render actual options, filtering out 'none.svg' files */}
         {options

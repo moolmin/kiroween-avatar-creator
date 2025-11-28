@@ -30,7 +30,9 @@ export default function Home() {
       try {
         // Preload all SVG files for better performance
         await Promise.all([
-          preloadCategorySvgs('eyes', ['round-eyes.svg', 'happy-eyes.svg']),
+          // Preload the default ghost body
+          fetch('/ghost-parts/kiro-body.svg'),
+          preloadCategorySvgs('eyes', ['round-eyes.svg', 'happy-eyes.svg', 'eyes-01.svg']),
           preloadCategorySvgs('hats', ['witch-hat.svg', 'pumpkin-hat.svg', 'none.svg']),
           preloadCategorySvgs('capes', ['white-cape.svg', 'purple-cape.svg', 'black-cape.svg']),
           preloadCategorySvgs('accessories', ['none.svg', 'wand.svg', 'pumpkin-basket.svg', 'candy.svg']),

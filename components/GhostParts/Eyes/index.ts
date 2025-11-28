@@ -16,6 +16,7 @@ import { createSvgRegistryFromFiles } from '@/lib/svgLoader';
 const svgFiles = [
   'round-eyes.svg',
   'happy-eyes.svg',
+  'eyes-01.svg',
 ];
 
 // Automatically generate registry from SVG files
