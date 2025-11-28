@@ -41,7 +41,7 @@
   - _Requirements: 2.1, 2.2_
   - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 6. Create example SVG assets for Capes category
+- [x] 6. Create example SVG assets for Capes category
   - Create public/ghost-parts/capes directory
   - Create white-cape.svg with white cape design
   - Create purple-cape.svg with purple cape design
