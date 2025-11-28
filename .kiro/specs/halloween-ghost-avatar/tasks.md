@@ -147,7 +147,7 @@
   - **Property 11: Random generation synchronizes state**
   - **Validates: Requirements 8.2**
 
-- [-] 14. Create RandomButton component
+- [x] 14. Create RandomButton component
   - Create components/controls/RandomButton.tsx
   - Connect to randomize() action from store
   - Add icon and styling

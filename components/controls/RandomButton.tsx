@@ -1,12 +1,13 @@
 /**
  * RandomButton Component
  * 
- * Button that triggers random avatar generation. Connects to the randomize()
- * action from the avatar store to generate a completely random avatar
- * configuration.
+ * A button that triggers random avatar generation.
+ * Connects to the randomize() action from the avatar store.
  * 
  * Requirements: 8.1, 8.2, 8.3
  */
+
+'use client';
 
 import { useAvatarStore } from '@/lib/avatarStore';
 
@@ -16,12 +17,11 @@ export default function RandomButton() {
   return (
     <button
       onClick={randomize}
-      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-orange-600 hover:to-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 transition-all duration-200 transform hover:scale-105 active:scale-95"
+      className="w-full flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-white font-medium shadow-md hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 transition-colors"
       aria-label="Generate random avatar"
     >
-      {/* Shuffle/Dice Icon */}
       <svg
-        className="w-5 h-5"
+        className="h-5 w-5"
         viewBox="0 0 20 20"
         fill="currentColor"
         aria-hidden="true"
