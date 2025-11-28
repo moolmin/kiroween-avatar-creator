@@ -18,19 +18,32 @@ import ExportButton from '@/components/ExportButton';
 import RandomButton from '@/components/controls/RandomButton';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import CompatibilityWarning from '@/components/CompatibilityWarning';
+import { preloadCategorySvgs } from '@/lib/svgLoader';
 
 export default function Home() {
   const canvasRef = useRef<SVGSVGElement>(null!);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate initial loading (for component registry initialization)
+  // Preload SVG files and initialize component registry
   useEffect(() => {
-    // Small delay to ensure all components are mounted
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 100);
+    const preloadAssets = async () => {
+      try {
+        // Preload all SVG files for better performance
+        await Promise.all([
+          preloadCategorySvgs('eyes', ['round-eyes.svg', 'happy-eyes.svg']),
+          preloadCategorySvgs('hats', ['witch-hat.svg', 'pumpkin-hat.svg']),
+          preloadCategorySvgs('capes', ['basic-cape.svg', 'torn-cape.svg']),
+          preloadCategorySvgs('accessories', ['candy-bag.svg', 'magic-wand.svg']),
+          preloadCategorySvgs('backgrounds', ['moon-bg.svg', 'graveyard-bg.svg']),
+        ]);
+      } catch (error) {
+        console.warn('Some assets failed to preload:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    preloadAssets();
   }, []);
 
   if (isLoading) {
