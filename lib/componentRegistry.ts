@@ -13,6 +13,7 @@ import * as Eyes from '@/components/GhostParts/Eyes';
 import * as Hats from '@/components/GhostParts/Hats';
 import * as Capes from '@/components/GhostParts/Capes';
 import * as Accessories from '@/components/GhostParts/Accessories';
+import * as Backgrounds from '@/components/GhostParts/Backgrounds';
 
 /**
  * Central component registry
@@ -32,7 +33,7 @@ export const componentRegistry: CategoryRegistry = {
   hats: Hats.registry,
   capes: Capes.registry,
   accessories: Accessories.registry,
-  backgrounds: [],
+  backgrounds: Backgrounds.registry,
 };
 
 /**

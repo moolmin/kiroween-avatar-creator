@@ -14,11 +14,9 @@ describe('Component Registry System', () => {
     it('should have all required categories', () => {
       const expectedCategories = [
         'eyes',
-        'mouths',
-        'eyebrows',
-        'bodies',
         'hats',
-        'handItems',
+        'capes',
+        'accessories',
         'backgrounds'
       ];
       
@@ -40,9 +38,10 @@ describe('Component Registry System', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null when category is empty', () => {
-      const result = getComponent('eyes', 'anyId');
-      expect(result).toBeNull();
+    it('should return component for valid category and ID', () => {
+      // Eyes category should have components now
+      const result = getComponent('eyes', 'round-eyes');
+      expect(result).not.toBeNull();
     });
   });
 
@@ -52,9 +51,12 @@ describe('Component Registry System', () => {
       expect(result).toEqual([]);
     });
 
-    it('should return empty array for valid but unpopulated category', () => {
+    it('should return array of options for populated category', () => {
       const result = getCategoryOptions('eyes');
-      expect(result).toEqual([]);
+      expect(result.length).toBeGreaterThan(0);
+      expect(result[0]).toHaveProperty('id');
+      expect(result[0]).toHaveProperty('label');
+      expect(result[0]).toHaveProperty('component');
     });
   });
 
@@ -74,11 +76,9 @@ describe('Component Registry System', () => {
     it('should return all category names', () => {
       const categories = getCategories();
       expect(categories).toContain('eyes');
-      expect(categories).toContain('mouths');
-      expect(categories).toContain('eyebrows');
-      expect(categories).toContain('bodies');
       expect(categories).toContain('hats');
-      expect(categories).toContain('handItems');
+      expect(categories).toContain('capes');
+      expect(categories).toContain('accessories');
       expect(categories).toContain('backgrounds');
     });
   });
