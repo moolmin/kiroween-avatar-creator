@@ -61,7 +61,7 @@ export default function TabbedCustomizationPanel({ className = '' }: Customizati
         className={`
           relative group rounded-xl p-3 transition-all duration-200 flex flex-col items-center justify-center
           ${isSelected 
-            ? 'ring-4 ring-purple-500 bg-purple-50 shadow-lg scale-105' 
+            ? 'ring-4 ring-purple-500 bg-purple-50 shadow-lg' 
             : 'ring-2 ring-gray-200 hover:ring-purple-300 bg-white hover:bg-purple-50'
           }
         `}
@@ -83,13 +83,6 @@ export default function TabbedCustomizationPanel({ className = '' }: Customizati
         <span className="block mt-2 text-xs sm:text-sm font-medium text-gray-700 truncate text-center">
           {isNoneOption ? 'None' : option.label}
         </span>
-        {isSelected && (
-          <div className="absolute -top-1 -right-1 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
-          </div>
-        )}
       </button>
     );
   };
@@ -114,48 +107,32 @@ export default function TabbedCustomizationPanel({ className = '' }: Customizati
   };
 
   return (
-    <div className={`bg-white rounded-2xl shadow-xl overflow-hidden ${className}`}>
-      {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-orange-500 p-4">
-        <h2 className="text-white text-xl font-bold">Customize Your Ghost</h2>
-      </div>
-
+    <div className={`bg-white overflow-hidden ${className}`}>
       {/* Tab Navigation */}
-      <div className="flex border-b border-gray-200">
+      <div className="flex bg-gray-50">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-              flex-1 px-1 sm:px-2 py-2 sm:py-3 text-sm font-medium transition-colors duration-200
+              flex-1 px-2 sm:px-6 py-3 sm:py-6 text-sm font-medium transition-all duration-200
               ${activeTab === tab.id
-                ? 'text-purple-600 border-b-3 border-purple-600 bg-purple-50'
-                : 'text-gray-600 hover:text-purple-600 hover:bg-gray-50'
+                ? 'text-purple-700 bg-white shadow-sm relative z-10'
+                : 'text-gray-600 hover:text-purple-600 hover:bg-gray-100'
               }
             `}
             aria-selected={activeTab === tab.id}
             role="tab"
           >
-            <span className="block text-lg sm:text-xl mb-0 sm:mb-1">{tab.icon}</span>
-            <span className="hidden sm:block text-xs">{tab.label}</span>
+            <span className="block text-xl sm:text-3xl mb-1 sm:mb-2">{tab.icon}</span>
+            <span className="hidden sm:block text-xs sm:text-sm font-semibold">{tab.label}</span>
           </button>
         ))}
       </div>
 
       {/* Tab Content */}
-      <div className="h-[400px] overflow-y-auto">
+      <div className="flex-1 h-[500px] sm:h-[550px] overflow-y-auto bg-white">
         {renderTabContent()}
-      </div>
-
-      {/* Random Button */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <button
-          onClick={randomize}
-          className="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-200 flex items-center justify-center gap-2"
-        >
-          <span>🎲</span>
-          <span>Randomize All</span>
-        </button>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import { useRef, useState, useEffect } from 'react';
 import AvatarCanvas from '@/components/AvatarCanvas';
 import TabbedCustomizationPanel from '@/components/TabbedCustomizationPanel';
 import ExportButton from '@/components/ExportButton';
+import RandomButton from '@/components/controls/RandomButton';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import CompatibilityWarning from '@/components/CompatibilityWarning';
 import { preloadCategorySvgs } from '@/lib/svgLoader';
@@ -83,12 +84,12 @@ export default function Home() {
       </header>
 
       {/* Desktop Layout (≥768px): Canvas Left, Customization Right */}
-      <div className="hidden md:grid md:grid-cols-[1fr_480px] h-[calc(100vh-120px)]">
+      <div className="hidden md:grid md:grid-cols-2 h-[calc(100vh-120px)]">
         {/* Left Content - Avatar Preview and Actions */}
         <div className="flex flex-col items-center justify-center p-8 gap-8">
           {/* Avatar Preview */}
-          <section id="avatar-preview" className="card-halloween w-full max-w-2xl hover-lift" aria-label="Avatar preview">
-            <div className="bg-gradient-to-br from-halloween-orange-50 to-halloween-purple-50 rounded-xl p-8">
+          <section id="avatar-preview" className="w-full max-w-2xl" aria-label="Avatar preview">
+            <div className="bg-primary-purple rounded-xl p-8">
               <ErrorBoundary>
                 <AvatarCanvas
                   ref={canvasRef}
@@ -98,14 +99,15 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Action Button - Export only */}
+          {/* Action Buttons */}
           <nav className="flex gap-4 w-full max-w-2xl justify-center" aria-label="Avatar actions">
-            <ExportButton svgRef={canvasRef} className="px-8" />
+            <RandomButton />
+            <ExportButton svgRef={canvasRef} />
           </nav>
         </div>
 
         {/* Right Sidebar - Tabbed Customization Panel */}
-        <aside className="bg-white shadow-2xl overflow-hidden border-l-4 border-halloween-purple-500" aria-label="Customization sidebar">
+        <aside className="bg-white shadow-2xl overflow-hidden" aria-label="Customization sidebar">
           <TabbedCustomizationPanel className="h-full" />
         </aside>
       </div>
@@ -114,8 +116,8 @@ export default function Home() {
       <div className="md:hidden flex flex-col h-[calc(100vh-140px)]">
         {/* Top - Avatar Preview */}
         <div className="flex-1 flex flex-col items-center justify-center p-4 overflow-auto">
-          <section id="avatar-preview" className="card-halloween w-full max-w-md" aria-label="Avatar preview">
-            <div className="bg-gradient-to-br from-halloween-orange-50 to-halloween-purple-50 rounded-xl p-4">
+          <section id="avatar-preview" className="w-full max-w-md" aria-label="Avatar preview">
+            <div className="bg-primary-purple rounded-xl p-4">
               <ErrorBoundary>
                 <AvatarCanvas
                   ref={canvasRef}
@@ -125,9 +127,14 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Export Button */}
-          <nav className="flex gap-3 w-full max-w-md mt-6 justify-center" aria-label="Avatar actions">
-            <ExportButton svgRef={canvasRef} className="px-8" />
+          {/* Action Buttons */}
+          <nav className="flex gap-3 w-full max-w-md mt-6" aria-label="Avatar actions">
+            <div className="flex-1">
+              <RandomButton />
+            </div>
+            <div className="flex-1">
+              <ExportButton svgRef={canvasRef} />
+            </div>
           </nav>
         </div>
 

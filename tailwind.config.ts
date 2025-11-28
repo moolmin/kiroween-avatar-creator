@@ -11,6 +11,21 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Primary purple
+        'primary-purple': '#8E48FF',
+        primary: {
+          DEFAULT: '#8E48FF',
+          50: '#F3ECFF',
+          100: '#E6D9FF',
+          200: '#CCB3FF',
+          300: '#B38DFF',
+          400: '#9967FF',
+          500: '#8E48FF',
+          600: '#7A3DCC',
+          700: '#663299',
+          800: '#522766',
+          900: '#3E1C33',
+        },
         // Halloween color palette
         halloween: {
           orange: {
