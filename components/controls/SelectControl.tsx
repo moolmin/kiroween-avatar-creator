@@ -21,6 +21,10 @@ export default function SelectControl({
   const selectedOption = options.find((opt) => opt.id === value);
   const displayValue = selectedOption?.label || (nullable ? 'None' : 'Select...');
 
+  // Extract clean label text for ARIA (remove emoji)
+  const cleanLabel = label.replace(/[^\w\s]/gi, '').trim();
+  const ariaLabel = `Select ${cleanLabel}, currently ${displayValue}`;
+
   return (
     <div className="w-full">
       <Listbox value={value} onChange={onChange}>
@@ -28,7 +32,10 @@ export default function SelectControl({
           <Listbox.Label className="block text-sm font-semibold text-gray-800 mb-2">
             {label}
           </Listbox.Label>
-          <Listbox.Button className="relative w-full min-h-[44px] cursor-pointer rounded-xl bg-white py-3 pl-4 pr-12 text-left shadow-md border-2 border-transparent transition-all duration-250 hover:border-halloween-orange-300 hover:shadow-lg focus:outline-none focus-visible:border-halloween-orange-500 focus-visible:ring-2 focus-visible:ring-halloween-orange-200 focus-visible:ring-offset-2 text-base font-medium text-gray-900">
+          <Listbox.Button 
+            className="relative w-full min-h-[44px] cursor-pointer rounded-xl bg-white py-3 pl-4 pr-12 text-left shadow-md border-2 border-transparent transition-all duration-250 hover:border-halloween-orange-300 hover:shadow-lg focus:outline-none focus-visible:border-halloween-orange-500 focus-visible:ring-4 focus-visible:ring-halloween-orange-300 focus-visible:ring-offset-2 text-base font-medium text-gray-900"
+            aria-label={ariaLabel}
+          >
             <span className="block truncate">{displayValue}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <svg
@@ -74,7 +81,7 @@ export default function SelectControl({
                         None
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-halloween-orange-600">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-halloween-orange-600" aria-label="Selected">
                           <svg
                             className="h-5 w-5"
                             viewBox="0 0 20 20"
@@ -113,7 +120,7 @@ export default function SelectControl({
                         {option.label}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-halloween-orange-600">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-halloween-orange-600" aria-label="Selected">
                           <svg
                             className="h-5 w-5"
                             viewBox="0 0 20 20"

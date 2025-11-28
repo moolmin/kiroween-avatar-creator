@@ -10,18 +10,28 @@
 'use client';
 
 import { useAvatarStore } from '@/lib/avatarStore';
+import { useState } from 'react';
 
 export default function RandomButton() {
   const randomize = useAvatarStore((state) => state.randomize);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+
+  const handleRandomize = () => {
+    setIsRandomizing(true);
+    randomize();
+    // Reset animation state after a brief moment
+    setTimeout(() => setIsRandomizing(false), 300);
+  };
 
   return (
     <button
-      onClick={randomize}
-      className="btn-halloween-primary w-full flex items-center justify-center gap-3"
-      aria-label="Generate random avatar"
+      onClick={handleRandomize}
+      className="btn-halloween-primary w-full flex items-center justify-center gap-3 group"
+      aria-label="Generate random avatar with random eyes, hat, cape, accessory, and background"
+      title="Click to randomize all avatar options"
     >
       <svg
-        className="h-6 w-6 transition-transform duration-250 group-hover:rotate-180"
+        className={`h-6 w-6 transition-transform duration-250 ${isRandomizing ? 'rotate-180' : 'group-hover:rotate-180'}`}
         viewBox="0 0 20 20"
         fill="currentColor"
         aria-hidden="true"

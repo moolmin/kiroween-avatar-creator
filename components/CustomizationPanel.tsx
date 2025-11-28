@@ -12,10 +12,12 @@
 import { useAvatarStore } from '@/lib/avatarStore';
 import { getCategoryOptions } from '@/lib/componentRegistry';
 import SelectControl from './controls/SelectControl';
+import { useState, useEffect } from 'react';
 
 export default function CustomizationPanel() {
   const config = useAvatarStore((state) => state.config);
   const updateConfig = useAvatarStore((state) => state.updateConfig);
+  const [announcement, setAnnouncement] = useState('');
 
   // Get options from component registry for each category
   const eyesOptions = getCategoryOptions('eyes');
@@ -24,8 +26,32 @@ export default function CustomizationPanel() {
   const accessoriesOptions = getCategoryOptions('accessories');
   const backgroundsOptions = getCategoryOptions('backgrounds');
 
+  // Announce changes to screen readers
+  useEffect(() => {
+    const changes: string[] = [];
+    
+    const eyeOption = eyesOptions.find(opt => opt.id === config.eyes);
+    if (eyeOption) changes.push(`Eyes: ${eyeOption.label}`);
+    
+    const hatOption = hatsOptions.find(opt => opt.id === config.hat);
+    changes.push(`Hat: ${hatOption?.label || 'None'}`);
+    
+    const capeOption = capesOptions.find(opt => opt.id === config.cape);
+    if (capeOption) changes.push(`Cape: ${capeOption.label}`);
+    
+    const accessoryOption = accessoriesOptions.find(opt => opt.id === config.accessory);
+    changes.push(`Accessory: ${accessoryOption?.label || 'None'}`);
+    
+    const backgroundOption = backgroundsOptions.find(opt => opt.id === config.background);
+    if (backgroundOption) changes.push(`Background: ${backgroundOption.label}`);
+    
+    if (changes.length > 0) {
+      setAnnouncement(`Avatar updated. ${changes.join(', ')}`);
+    }
+  }, [config, eyesOptions, hatsOptions, capesOptions, accessoriesOptions, backgroundsOptions]);
+
   return (
-    <div className="w-full h-full panel-halloween p-6 overflow-y-auto">
+    <div className="w-full h-full panel-halloween p-6 overflow-y-auto" role="region" aria-label="Avatar customization controls">
       <div className="max-w-md mx-auto lg:max-w-none">
         <div className="mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-halloween-gradient mb-2">
@@ -94,9 +120,9 @@ export default function CustomizationPanel() {
         </div>
 
         {/* Helper text */}
-        <div className="mt-8 p-5 bg-white rounded-xl shadow-md border-2 border-halloween-orange-200 transition-smooth hover:shadow-lg">
+        <div className="mt-8 p-5 bg-white rounded-xl shadow-md border-2 border-halloween-orange-200 transition-smooth hover:shadow-lg" role="complementary" aria-label="Customization tips">
           <div className="flex items-start gap-3">
-            <span className="text-2xl flex-shrink-0">💡</span>
+            <span className="text-2xl flex-shrink-0" aria-hidden="true">💡</span>
             <div>
               <p className="text-sm font-medium text-gray-800 mb-1">
                 Quick Tips
@@ -104,10 +130,21 @@ export default function CustomizationPanel() {
               <p className="text-xs text-gray-600 leading-relaxed">
                 Select different options to customize your ghost avatar.
                 Hat and accessory can be removed by selecting "None".
+                Use Tab to navigate between controls and Enter or Space to open dropdowns.
               </p>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Screen reader announcements for configuration changes */}
+      <div 
+        className="sr-only" 
+        role="status" 
+        aria-live="polite" 
+        aria-atomic="true"
+      >
+        {announcement}
       </div>
     </div>
   );

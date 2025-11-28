@@ -58,6 +58,7 @@ describe('RandomButton', () => {
     render(<RandomButton />);
     
     const button = screen.getByRole('button', { name: /generate random avatar/i });
-    expect(button.getAttribute('aria-label')).toBe('Generate random avatar');
+    expect(button.getAttribute('aria-label')).toBe('Generate random avatar with random eyes, hat, cape, accessory, and background');
+    expect(button.getAttribute('title')).toBe('Click to randomize all avatar options');
   });
 });

@@ -55,6 +55,21 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
       ? getComponent('accessories', config.accessory)
       : null;
 
+    // Build descriptive label for screen readers
+    const buildAriaLabel = () => {
+      const parts: string[] = ['Customized ghost avatar with'];
+      
+      if (config.eyes) parts.push(config.eyes.replace(/-/g, ' '));
+      if (config.hat) parts.push(`wearing ${config.hat.replace(/-/g, ' ')}`);
+      if (config.cape) parts.push(`${config.cape.replace(/-/g, ' ')}`);
+      if (config.accessory) parts.push(`holding ${config.accessory.replace(/-/g, ' ')}`);
+      if (config.background && config.background !== 'none') {
+        parts.push(`on ${config.background.replace(/-/g, ' ')} background`);
+      }
+      
+      return parts.join(', ');
+    };
+
     return (
       <svg
         ref={ref}
@@ -62,7 +77,7 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         className={className}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="Customized ghost avatar"
+        aria-label={buildAriaLabel()}
       >
         {/* Layer 1: Background */}
         {BackgroundComponent && <BackgroundComponent />}

@@ -58,11 +58,25 @@ body {
     min-width: 44px;
   }
 
-  /* Focus visible styles for accessibility */
+  /* Focus visible styles for accessibility - high contrast and clear */
   *:focus-visible {
-    outline: 2px solid var(--halloween-orange);
-    outline-offset: 2px;
+    outline: 3px solid var(--halloween-orange);
+    outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  /* Enhanced focus for interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 3px solid var(--halloween-orange);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.2);
+  }
+
+  /* Keyboard navigation indicator */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
@@ -111,6 +125,41 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Screen reader only - visually hidden but accessible to screen readers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only:focus,
+  .sr-only:active {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Not screen reader only - make visible */
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
   }
 
   /* Smooth transitions */

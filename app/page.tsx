@@ -45,11 +45,19 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-halloween-gradient">
+      {/* Skip to main content link for keyboard users */}
+      <a 
+        href="#avatar-preview" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-halloween-orange-500 focus:text-white focus:rounded-lg focus:shadow-lg focus:ring-4 focus:ring-halloween-orange-300"
+      >
+        Skip to avatar preview
+      </a>
+
       {/* Header */}
       <header className="bg-white shadow-md border-b-4 border-halloween-orange-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <h1 className="text-3xl md:text-5xl font-bold text-center text-halloween-gradient animate-pulse-slow">
-            🎃 Halloween Ghost Avatar Maker 👻
+            <span aria-hidden="true">🎃</span> Halloween Ghost Avatar Maker <span aria-hidden="true">👻</span>
           </h1>
           <p className="text-center text-gray-600 mt-2 text-sm md:text-base">
             Create your spooky ghost avatar and share it with the world!
@@ -60,31 +68,31 @@ export default function Home() {
       {/* Desktop Layout (≥768px): Sidebar */}
       <div className="hidden md:grid md:grid-cols-[420px_1fr] h-[calc(100vh-120px)]">
         {/* Left Sidebar - Customization Panel */}
-        <aside className="bg-white shadow-2xl overflow-hidden border-r-4 border-halloween-purple-500">
+        <aside className="bg-white shadow-2xl overflow-hidden border-r-4 border-halloween-purple-500" aria-label="Customization sidebar">
           <CustomizationPanel />
         </aside>
 
         {/* Right Content - Avatar Preview and Actions */}
         <div className="flex flex-col items-center justify-center p-8 gap-8">
           {/* Avatar Preview */}
-          <div className="card-halloween w-full max-w-2xl hover-lift">
+          <section id="avatar-preview" className="card-halloween w-full max-w-2xl hover-lift" aria-label="Avatar preview">
             <div className="bg-gradient-to-br from-halloween-orange-50 to-halloween-purple-50 rounded-xl p-8">
               <AvatarCanvas
                 ref={canvasRef}
                 className="w-full h-auto drop-shadow-2xl"
               />
             </div>
-          </div>
+          </section>
 
           {/* Action Buttons */}
-          <div className="flex gap-4 w-full max-w-2xl">
+          <nav className="flex gap-4 w-full max-w-2xl" aria-label="Avatar actions">
             <div className="flex-1">
               <RandomButton />
             </div>
             <div className="flex-1">
               <ExportButton svgRef={canvasRef} />
             </div>
-          </div>
+          </nav>
         </div>
       </div>
 
@@ -92,30 +100,30 @@ export default function Home() {
       <div className="md:hidden flex flex-col h-[calc(100vh-140px)]">
         {/* Top - Avatar Preview */}
         <div className="flex-1 flex flex-col items-center justify-center p-4 overflow-auto">
-          <div className="card-halloween w-full max-w-md">
+          <section id="avatar-preview" className="card-halloween w-full max-w-md" aria-label="Avatar preview">
             <div className="bg-gradient-to-br from-halloween-orange-50 to-halloween-purple-50 rounded-xl p-4">
               <AvatarCanvas
                 ref={canvasRef}
                 className="w-full h-auto drop-shadow-xl"
               />
             </div>
-          </div>
+          </section>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 w-full max-w-md mt-6">
+          <nav className="flex gap-3 w-full max-w-md mt-6" aria-label="Avatar actions">
             <div className="flex-1">
               <RandomButton />
             </div>
             <div className="flex-1">
               <ExportButton svgRef={canvasRef} />
             </div>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom - Customization Panel */}
-        <div className="bg-white shadow-2xl rounded-t-3xl max-h-[50vh] overflow-hidden border-t-4 border-halloween-orange-500">
+        <aside className="bg-white shadow-2xl rounded-t-3xl max-h-[50vh] overflow-hidden border-t-4 border-halloween-orange-500" aria-label="Customization panel">
           <CustomizationPanel />
-        </div>
+        </aside>
       </div>
     </main>
   );

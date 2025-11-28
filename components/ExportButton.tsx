@@ -57,7 +57,9 @@ export default function ExportButton({ svgRef, className = '' }: ExportButtonPro
         onClick={handleExport}
         disabled={isExporting}
         className="btn-halloween-secondary w-full flex items-center justify-center gap-3"
-        aria-label={isExporting ? 'Exporting avatar...' : 'Export avatar as PNG'}
+        aria-label={isExporting ? 'Exporting avatar, please wait' : 'Export avatar as PNG image'}
+        aria-busy={isExporting}
+        title="Download your customized avatar as a PNG image (1024x1024 pixels)"
       >
         {isExporting ? (
           <>
