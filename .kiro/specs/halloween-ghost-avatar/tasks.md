@@ -132,7 +132,7 @@
   - Implement responsive layout (sidebar on desktop, bottom sheet on mobile)
   - _Requirements: 1.1, 2.1, 2.2, 3.1, 4.1, 4.2, 5.1, 9.1, 9.2, 9.4_
 
-- [ ] 13. Implement random generation functionality
+- [x] 13. Implement random generation functionality
   - Add randomize() action to avatarStore
   - Implement logic to select random valid options from each category
   - Handle nullable options (hat, accessory - randomly include or exclude)
@@ -147,7 +147,7 @@
   - **Property 11: Random generation synchronizes state**
   - **Validates: Requirements 8.2**
 
-- [ ] 14. Create RandomButton component
+- [-] 14. Create RandomButton component
   - Create components/controls/RandomButton.tsx
   - Connect to randomize() action from store
   - Add icon and styling
