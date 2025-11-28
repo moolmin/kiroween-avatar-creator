@@ -115,13 +115,9 @@ export interface GhostPartProps {
 
 export interface AvatarConfiguration {
   eyes: string;
-  mouth: string;
-  eyebrows: string;
-  blush: boolean;
-  body: string;
   hat: string | null;
-  leftHandItem: string | null;
-  rightHandItem: string | null;
+  cape: string;
+  accessory: string | null;
   background: string;
 }
 
@@ -145,16 +141,16 @@ The registry system provides a centralized mapping between option IDs and their 
 
 import { CategoryRegistry } from './types';
 import * as Eyes from '@/components/GhostParts/Eyes';
-import * as Mouths from '@/components/GhostParts/Mouths';
-// ... other imports
+import * as Hats from '@/components/GhostParts/Hats';
+import * as Capes from '@/components/GhostParts/Capes';
+import * as Accessories from '@/components/GhostParts/Accessories';
+import * as Backgrounds from '@/components/GhostParts/Backgrounds';
 
 export const componentRegistry: CategoryRegistry = {
   eyes: Eyes.registry,
-  mouths: Mouths.registry,
-  eyebrows: Eyebrows.registry,
-  bodies: Bodies.registry,
   hats: Hats.registry,
-  handItems: HandItems.registry,
+  capes: Capes.registry,
+  accessories: Accessories.registry,
   backgrounds: Backgrounds.registry,
 };
 
@@ -226,14 +222,10 @@ interface AvatarStore {
 
 export const useAvatarStore = create<AvatarStore>((set) => ({
   config: {
-    eyes: 'round',
-    mouth: 'smile',
-    eyebrows: 'normal',
-    blush: false,
-    body: 'white',
+    eyes: 'round-eyes',
     hat: null,
-    leftHandItem: null,
-    rightHandItem: null,
+    cape: 'white-cape',
+    accessory: null,
     background: 'none',
   },
   updateConfig: (updates) => set((state) => ({
@@ -258,9 +250,10 @@ export default function AvatarCanvas() {
 
   // Get components from registry
   const BackgroundComponent = getComponent('backgrounds', config.background);
-  const BodyComponent = getComponent('bodies', config.body);
+  const CapeComponent = getComponent('capes', config.cape);
   const EyesComponent = getComponent('eyes', config.eyes);
-  // ... other components
+  const HatComponent = config.hat ? getComponent('hats', config.hat) : null;
+  const AccessoryComponent = config.accessory ? getComponent('accessories', config.accessory) : null;
 
   return (
     <svg
@@ -272,15 +265,17 @@ export default function AvatarCanvas() {
       {/* Layer 1: Background */}
       {BackgroundComponent && <BackgroundComponent />}
       
-      {/* Layer 2: Body */}
-      {BodyComponent && <BodyComponent />}
+      {/* Layer 2: Cape */}
+      {CapeComponent && <CapeComponent />}
       
-      {/* Layer 3: Facial features */}
+      {/* Layer 3: Eyes */}
       {EyesComponent && <EyesComponent />}
-      {/* ... other facial features */}
       
-      {/* Layer 4: Accessories */}
-      {/* ... hats and hand items */}
+      {/* Layer 4: Hat */}
+      {HatComponent && <HatComponent />}
+      
+      {/* Layer 5: Accessory */}
+      {AccessoryComponent && <AccessoryComponent />}
     </svg>
   );
 }

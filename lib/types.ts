@@ -14,19 +14,17 @@ export interface GhostPartProps {
  * Represents all customization options for the ghost avatar
  */
 export interface AvatarConfiguration {
-  // Facial features
+  // Eyes
   eyes: string;
-  mouth: string;
-  eyebrows: string;
-  blush: boolean;
   
-  // Body
-  body: string;
-  
-  // Accessories (nullable - can be removed)
+  // Hat (nullable - can be removed)
   hat: string | null;
-  leftHandItem: string | null;
-  rightHandItem: string | null;
+  
+  // Cape
+  cape: string;
+  
+  // Accessory (nullable - can be removed)
+  accessory: string | null;
   
   // Background
   background: string;

@@ -25,11 +25,9 @@ import { CategoryRegistry, ComponentRegistryEntry } from './types';
  */
 export const componentRegistry: CategoryRegistry = {
   eyes: [],
-  mouths: [],
-  eyebrows: [],
-  bodies: [],
   hats: [],
-  handItems: [],
+  capes: [],
+  accessories: [],
   backgrounds: [],
 };
 
