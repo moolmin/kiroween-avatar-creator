@@ -65,43 +65,40 @@ components/
 │   └── RandomButton.tsx        # Random generation button
 ├── ExportButton.tsx            # PNG download functionality
 └── GhostParts/
+    ├── README.md               # Guide for adding new SVG assets
     ├── Eyes/
-    │   ├── index.ts            # Registry for eye components
-    │   ├── RoundEyes.tsx       # Example 1
-    │   └── HappyEyes.tsx       # Example 2
+    │   └── index.ts            # SVG file list for eyes
     ├── Mouths/
-    │   ├── index.ts            # Registry for mouth components
-    │   ├── SmileMouth.tsx      # Example 1
-    │   └── GrinMouth.tsx       # Example 2
+    │   └── index.ts            # SVG file list for mouths
     ├── Eyebrows/
-    │   ├── index.ts            # Registry for eyebrow components
-    │   ├── NormalBrows.tsx     # Example 1
-    │   └── AngryBrows.tsx      # Example 2
+    │   └── index.ts            # SVG file list for eyebrows
     ├── Bodies/
-    │   ├── index.ts            # Registry for body components
-    │   ├── WhiteGhost.tsx      # Example 1
-    │   └── PurpleGhost.tsx     # Example 2
+    │   └── index.ts            # SVG file list for bodies
     ├── Hats/
-    │   ├── index.ts            # Registry for hat components
-    │   ├── WitchHat.tsx        # Example 1
-    │   └── PumpkinHat.tsx      # Example 2
+    │   └── index.ts            # SVG file list for hats
     ├── HandItems/
-    │   ├── index.ts            # Registry for hand item components
-    │   ├── Candy.tsx           # Example 1
-    │   └── Broom.tsx           # Example 2
+    │   └── index.ts            # SVG file list for hand items
     └── Backgrounds/
-        ├── index.ts            # Registry for background components
-        ├── Sparkles.tsx        # Example 1
-        └── None.tsx            # Example 2
+        └── index.ts            # SVG file list for backgrounds
 
 lib/
 ├── avatarStore.ts              # State management (Zustand)
 ├── componentRegistry.ts        # Central registry system
+├── svgLoader.tsx               # SVG file loader utility
 ├── exportUtils.ts              # PNG export functionality
 └── types.ts                    # TypeScript type definitions
 
 public/
-└── (static assets if needed)
+└── ghost-parts/                # SVG asset files
+    ├── eyes/
+    │   ├── round-eyes.svg
+    │   └── happy-eyes.svg
+    ├── mouths/
+    ├── eyebrows/
+    ├── bodies/
+    ├── hats/
+    ├── hand-items/
+    └── backgrounds/
 ```
 
 ## Components and Interfaces
@@ -168,44 +165,47 @@ export function getComponent(category: string, id: string) {
 }
 ```
 
-### Category Index Pattern
+### Category Index Pattern (SVG File-Based)
 
-Each asset category has an index file that exports its registry:
+Each asset category has an index file that lists SVG files to load:
 
 ```typescript
 // components/GhostParts/Eyes/index.ts
 
-import { ComponentRegistryEntry } from '@/lib/types';
-import RoundEyes from './RoundEyes';
-import HappyEyes from './HappyEyes';
+import { createSvgRegistryFromFiles } from '@/lib/svgLoader';
 
-export const registry: ComponentRegistryEntry[] = [
-  { id: 'round', label: 'Round Eyes', component: RoundEyes },
-  { id: 'happy', label: 'Happy Eyes', component: HappyEyes },
-  // Client adds more entries here
+// List all SVG files in the eyes category
+const svgFiles = [
+  'round-eyes.svg',
+  'happy-eyes.svg',
+  // Add more SVG files here
 ];
 
-export { RoundEyes, HappyEyes };
+// Automatically generate registry from SVG files
+export const registry = createSvgRegistryFromFiles('eyes', svgFiles);
 ```
 
-### SVG Component Pattern
+### SVG File Pattern
 
-Each SVG component follows a consistent structure:
+Each SVG file should be placed in `public/ghost-parts/{category}/` and follow this structure:
 
-```typescript
-// components/GhostParts/Eyes/RoundEyes.tsx
+```xml
+<!-- public/ghost-parts/eyes/round-eyes.svg -->
 
-import { GhostPartProps } from '@/lib/types';
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left eye -->
+  <circle cx="380" cy="420" r="35" fill="#000000" />
+  
+  <!-- Right eye -->
+  <circle cx="644" cy="420" r="35" fill="#000000" />
+</svg>
+```
 
-export default function RoundEyes({ className, style }: GhostPartProps) {
-  return (
-    <g className={className} style={style}>
-      {/* SVG paths and shapes */}
-      <circle cx="40" cy="50" r="8" fill="#000" />
-      <circle cx="60" cy="50" r="8" fill="#000" />
-    </g>
-  );
-}
+**Benefits of SVG File-Based Approach:**
+- No need to write React components manually
+- Simply add SVG files to the public folder
+- File names automatically convert to labels (e.g., `round-eyes.svg` → "Round Eyes")
+- Easy for designers to add new assets without coding
 ```
 
 ### State Management

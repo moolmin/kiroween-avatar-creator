@@ -24,54 +24,61 @@
   - **Property 12: Registry extension enables component usage**
   - **Validates: Requirements 8.1, 8.2**
 
-- [ ] 4. Create example SVG components for Eyes category
-  - Create components/GhostParts/Eyes directory
-  - Implement RoundEyes.tsx component with circular eye shapes
-  - Implement HappyEyes.tsx component with curved eye shapes
-  - Create index.ts with registry export for eyes
+- [x] 4. Create example SVG assets for Eyes category
+  - Create public/ghost-parts/eyes directory
+  - Create round-eyes.svg with circular eye shapes
+  - Create happy-eyes.svg with curved eye shapes
+  - Create components/GhostParts/Eyes/index.ts with SVG file list
   - _Requirements: 1.1_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 5. Create example SVG components for Mouths category
-  - Create components/GhostParts/Mouths directory
-  - Implement SmileMouth.tsx component with curved smile
-  - Implement GrinMouth.tsx component with wide grin
-  - Create index.ts with registry export for mouths
+- [ ] 5. Create example SVG assets for Mouths category
+  - Create public/ghost-parts/mouths directory
+  - Create smile-mouth.svg with curved smile
+  - Create grin-mouth.svg with wide grin
+  - Create components/GhostParts/Mouths/index.ts with SVG file list
   - _Requirements: 1.2_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 6. Create example SVG components for Eyebrows category
-  - Create components/GhostParts/Eyebrows directory
-  - Implement NormalBrows.tsx component with standard eyebrows
-  - Implement AngryBrows.tsx component with angled eyebrows
-  - Create index.ts with registry export for eyebrows
+- [ ] 6. Create example SVG assets for Eyebrows category
+  - Create public/ghost-parts/eyebrows directory
+  - Create normal-brows.svg with standard eyebrows
+  - Create angry-brows.svg with angled eyebrows
+  - Create components/GhostParts/Eyebrows/index.ts with SVG file list
   - _Requirements: 1.3_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 7. Create example SVG components for Bodies category
-  - Create components/GhostParts/Bodies directory
-  - Implement WhiteGhost.tsx component with white ghost body
-  - Implement PurpleGhost.tsx component with purple ghost body
-  - Create index.ts with registry export for bodies
+- [ ] 7. Create example SVG assets for Bodies category
+  - Create public/ghost-parts/bodies directory
+  - Create white-ghost.svg with white ghost body
+  - Create purple-ghost.svg with purple ghost body
+  - Create components/GhostParts/Bodies/index.ts with SVG file list
   - _Requirements: 2.1_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 8. Create example SVG components for Hats category
-  - Create components/GhostParts/Hats directory
-  - Implement WitchHat.tsx component with witch hat design
-  - Implement PumpkinHat.tsx component with pumpkin hat design
-  - Create index.ts with registry export for hats
+- [ ] 8. Create example SVG assets for Hats category
+  - Create public/ghost-parts/hats directory
+  - Create witch-hat.svg with witch hat design
+  - Create pumpkin-hat.svg with pumpkin hat design
+  - Create components/GhostParts/Hats/index.ts with SVG file list
   - _Requirements: 3.1_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 9. Create example SVG components for HandItems category
-  - Create components/GhostParts/HandItems directory
-  - Implement Candy.tsx component with candy design
-  - Implement Broom.tsx component with broom design
-  - Create index.ts with registry export for hand items
+- [ ] 9. Create example SVG assets for HandItems category
+  - Create public/ghost-parts/hand-items directory
+  - Create candy.svg with candy design
+  - Create broom.svg with broom design
+  - Create components/GhostParts/HandItems/index.ts with SVG file list
   - _Requirements: 3.2, 3.3_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 10. Create example SVG components for Backgrounds category
-  - Create components/GhostParts/Backgrounds directory
-  - Implement Sparkles.tsx component with sparkle effects
-  - Implement None.tsx component (empty background)
-  - Create index.ts with registry export for backgrounds
+- [ ] 10. Create example SVG assets for Backgrounds category
+  - Create public/ghost-parts/backgrounds directory
+  - Create sparkles.svg with sparkle effects
+  - Create none.svg (empty/transparent background)
+  - Create components/GhostParts/Backgrounds/index.ts with SVG file list
   - _Requirements: 4.1, 4.2_
+  - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
 - [ ]* 10.1 Write property test for facial feature rendering
   - **Property 1: Facial feature selection renders correct component**
