@@ -9,6 +9,10 @@
  */
 
 import { CategoryRegistry, ComponentRegistryEntry } from './types';
+import * as Eyes from '@/components/GhostParts/Eyes';
+import * as Hats from '@/components/GhostParts/Hats';
+import * as Capes from '@/components/GhostParts/Capes';
+import * as Accessories from '@/components/GhostParts/Accessories';
 
 /**
  * Central component registry
@@ -24,10 +28,10 @@ import { CategoryRegistry, ComponentRegistryEntry } from './types';
  * }
  */
 export const componentRegistry: CategoryRegistry = {
-  eyes: [],
-  hats: [],
-  capes: [],
-  accessories: [],
+  eyes: Eyes.registry,
+  hats: Hats.registry,
+  capes: Capes.registry,
+  accessories: Accessories.registry,
   backgrounds: [],
 };
 

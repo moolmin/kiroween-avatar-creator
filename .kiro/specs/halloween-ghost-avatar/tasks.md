@@ -50,7 +50,7 @@
   - _Requirements: 3.1, 3.2_
   - _Note: Uses SVG file-based system - just add SVG files to public folder_
 
-- [ ] 7. Create example SVG assets for Accessories category
+- [x] 7. Create example SVG assets for Accessories category
   - Create public/ghost-parts/accessories directory
   - Create wand.svg with magic wand design
   - Create pumpkin-basket.svg with pumpkin basket design
