@@ -21,7 +21,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { useAvatarStore } from '@/lib/avatarStore';
 import { getComponent } from '@/lib/componentRegistry';
 import { SVGComponentErrorBoundary } from './SVGComponentErrorBoundary';
-import { getComponentTransform, transformToString } from '@/lib/componentTransforms';
+import { getSVGTransform, transformToString } from '@/lib/componentTransforms';
 
 /**
  * AvatarCanvas component props
@@ -116,14 +116,14 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         {ghostBodyContent && (
           <g 
             dangerouslySetInnerHTML={{ __html: ghostBodyContent }}
-            transform={transformToString(getComponentTransform('ghostBody'))}
+            transform={transformToString(getSVGTransform('ghostBody', 'kiro-body'))}
           />
         )}
 
         {/* Layer 3: Cape */}
         {CapeComponent && (
           <SVGComponentErrorBoundary componentName={`cape-${config.cape}`}>
-            <g transform={transformToString(getComponentTransform('capes', config.cape))}>
+            <g transform={transformToString(getSVGTransform('capes', config.cape))}>
               <CapeComponent />
             </g>
           </SVGComponentErrorBoundary>
@@ -132,7 +132,7 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         {/* Layer 4: Eyes */}
         {EyesComponent && (
           <SVGComponentErrorBoundary componentName={`eyes-${config.eyes}`}>
-            <g transform={transformToString(getComponentTransform('eyes', config.eyes))}>
+            <g transform={transformToString(getSVGTransform('eyes', config.eyes))}>
               <EyesComponent />
             </g>
           </SVGComponentErrorBoundary>
@@ -141,7 +141,7 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         {/* Layer 5: Hat */}
         {HatComponent && config.hat && (
           <SVGComponentErrorBoundary componentName={`hat-${config.hat}`}>
-            <g transform={transformToString(getComponentTransform('hats', config.hat))}>
+            <g transform={transformToString(getSVGTransform('hats', config.hat))}>
               <HatComponent />
             </g>
           </SVGComponentErrorBoundary>
@@ -150,7 +150,7 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         {/* Layer 6: Accessory */}
         {AccessoryComponent && config.accessory && (
           <SVGComponentErrorBoundary componentName={`accessory-${config.accessory}`}>
-            <g transform={transformToString(getComponentTransform('accessories', config.accessory))}>
+            <g transform={transformToString(getSVGTransform('accessories', config.accessory))}>
               <AccessoryComponent />
             </g>
           </SVGComponentErrorBoundary>
