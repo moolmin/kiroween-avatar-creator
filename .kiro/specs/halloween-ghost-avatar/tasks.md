@@ -20,7 +20,7 @@
   - Add error handling for invalid component IDs
   - _Requirements: 8.1, 8.2_
 
-- [ ]* 3.1 Write property test for registry extension
+- [x] 3.1 Write property test for registry extension
   - **Property 12: Registry extension enables component usage**
   - **Validates: Requirements 8.1, 8.2**
 
