@@ -89,7 +89,7 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
             />
           )}
         </div>
-        <span className="block mt-2 text-xs sm:text-sm font-medium text-gray-700 truncate text-center">
+        <span className="sr-only">
           {isNoneOption ? 'None' : option.label}
         </span>
       </button>
