@@ -14,7 +14,6 @@
 import { useRef, useState, useEffect } from 'react';
 import AvatarCanvas from '@/components/AvatarCanvas';
 import TabbedCustomizationPanel from '@/components/TabbedCustomizationPanel';
-import ExportButton from '@/components/ExportButton';
 import RandomButton from '@/components/controls/RandomButton';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import CompatibilityWarning from '@/components/CompatibilityWarning';
@@ -90,15 +89,14 @@ export default function Home() {
           </section>
 
           {/* Action Buttons */}
-          <nav className="flex gap-4 w-full max-w-2xl justify-left" aria-label="Avatar actions">
+          <nav className="flex gap-4 w-full max-w-lg justify-center" aria-label="Avatar actions">
             <RandomButton />
-            <ExportButton svgRef={canvasRef} />
           </nav>
         </div>
 
         {/* Right Sidebar - Tabbed Customization Panel */}
         <aside className="bg-white overflow-hidden" aria-label="Customization sidebar">
-          <TabbedCustomizationPanel className="h-full" />
+          <TabbedCustomizationPanel className="h-full" svgRef={canvasRef} />
         </aside>
       </div>
 
@@ -118,19 +116,14 @@ export default function Home() {
           </section>
 
           {/* Action Buttons */}
-          <nav className="flex gap-3 w-full max-w-md mt-6" aria-label="Avatar actions">
-            <div className="flex-1">
-              <RandomButton />
-            </div>
-            <div className="flex-1">
-              <ExportButton svgRef={canvasRef} />
-            </div>
+          <nav className="flex gap-3 w-full max-w-sm mt-6 justify-center" aria-label="Avatar actions">
+            <RandomButton />
           </nav>
         </div>
 
         {/* Bottom - Tabbed Customization Panel */}
         <aside className="bg-white shadow-2xl rounded-t-3xl max-h-[60vh] overflow-hidden border-t-4 border-halloween-orange-500" aria-label="Customization panel">
-          <TabbedCustomizationPanel />
+          <TabbedCustomizationPanel svgRef={canvasRef} />
         </aside>
       </div>
     </main>

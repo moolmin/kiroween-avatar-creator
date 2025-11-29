@@ -26,7 +26,7 @@ export default function RandomButton() {
   return (
     <button
       onClick={handleRandomize}
-      className="px-6 py-3 flex items-center justify-center gap-3 group bg-transparent border-2 border-white text-white transition-all duration-250 rounded-lg font-medium"
+      className="px-6 py-3 flex items-center justify-center gap-3 group bg-transparent border-2 border-black text-black transition-all duration-250 rounded-lg font-medium"
       aria-label="Generate random avatar with random eyes, hat, cape, accessory, and background"
       title="Click to randomize all avatar options"
     >
