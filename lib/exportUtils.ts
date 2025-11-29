@@ -97,19 +97,36 @@ export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void
       const timestamp = Date.now();
       const filename = `kiroween-avatar-${timestamp}.png`;
       
-      // Convert canvas to blob and trigger download
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          
-          // Check if mobile device
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          
-          if (isMobile) {
-            // On mobile, open image in new tab for long-press save
-            window.open(url, '_blank');
-          } else {
-            // On desktop, trigger download
+      // Check if mobile device
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // On mobile, convert to data URL and open in new window
+        const dataUrl = canvas.toDataURL('image/png', 1.0);
+        const newWindow = window.open();
+        if (newWindow) {
+          newWindow.document.write(`
+            <html>
+              <head>
+                <title>Kiroween Avatar</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                  body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f0f0f0; }
+                  img { max-width: 100%; height: auto; }
+                </style>
+              </head>
+              <body>
+                <img src="${dataUrl}" alt="Kiroween Avatar" />
+              </body>
+            </html>
+          `);
+          newWindow.document.close();
+        }
+      } else {
+        // On desktop, trigger download
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
             link.download = filename;
@@ -117,14 +134,12 @@ export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(url), 100);
+          } else {
+            throw new Error('Failed to create PNG blob');
           }
-          
-          // Clean up the object URL after a delay
-          setTimeout(() => URL.revokeObjectURL(url), 5000);
-        } else {
-          throw new Error('Failed to create PNG blob');
-        }
-      }, 'image/png', 1.0); // Maximum quality
+        }, 'image/png', 1.0);
+      }
     } finally {
       // Clean up temporary container
       document.body.removeChild(container);
