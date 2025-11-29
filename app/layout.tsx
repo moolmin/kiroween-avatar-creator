@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Halloween Ghost Avatar Maker",
+  title: "Kiroween Avatar Maker",
   description: "Create customized ghost avatars for Halloween",
 };
 

@@ -23,20 +23,47 @@ export default function Home() {
   const canvasRef = useRef<SVGSVGElement>(null!);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Preload SVG files and initialize component registry
+  // Preload all assets including PNG images
   useEffect(() => {
+    const preloadImage = (src: string) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
+
     const preloadAssets = async () => {
       try {
-        // Preload all SVG files for better performance
-        await Promise.all([
-          // Preload the default ghost body
-          fetch('/ghost-parts/kiro-body.svg'),
-          preloadCategorySvgs('eyes', ['eyes-01.svg', 'eyes-02.svg', 'eyes-03.svg', 'eyes-04.svg', 'eyes-06.svg', 'eyes-07.svg', 'eyes-08.svg']),
-          preloadCategorySvgs('hats', ['hat-01.svg', 'hat-02.svg', 'hat-03.svg']),
-          preloadCategorySvgs('capes', ['white-cape.svg', 'purple-cape.svg', 'black-cape.svg', 'capes-01.svg']),
-          preloadCategorySvgs('accessories', ['none.svg', 'wand.svg', 'pumpkin-basket.svg', 'candy.svg']),
-          preloadCategorySvgs('backgrounds', ['sparkles.svg', 'moon.svg', 'none.svg']),
-        ]);
+        // Preload the default ghost body SVG
+        await fetch('/ghost-parts/kiro-body.svg');
+
+        // Preload all PNG images
+        const imagePromises = [
+          // Eyes
+          ...['eyes-01', 'eyes-02', 'eyes-03', 'eyes-04', 'eyes-05', 'eyes-06', 'eyes-07'].map(id => 
+            preloadImage(`/ghost-parts/eyes/${id}.png`)
+          ),
+          // Hats
+          ...['hat-01', 'hat-02', 'hat-03', 'hat-04', 'hat-05', 'hat-06'].map(id => 
+            preloadImage(`/ghost-parts/hats/${id}.png`)
+          ),
+          // Capes
+          ...['capes-01', 'capes-02', 'capes-03', 'capes-04'].map(id => 
+            preloadImage(`/ghost-parts/capes/${id}.png`)
+          ),
+          // Accessories
+          ...['accessories-01', 'accessories-02', 'accessories-03', 'accessories-04', 'accessories-05', 'accessories-06', 'accessories-07', 'accessories-08', 'accessories-09', 'accessories-10'].map(id => 
+            preloadImage(`/ghost-parts/accessories/${id}.png`)
+          ),
+          // Backgrounds
+          ...['background-00', 'background-01', 'background-02', 'background-03', 'background-04', 'background-05'].map(id => 
+            preloadImage(`/ghost-parts/backgrounds/${id}.png`)
+          ),
+        ];
+
+        await Promise.all(imagePromises);
       } catch (error) {
         console.warn('Some assets failed to preload:', error);
       } finally {
