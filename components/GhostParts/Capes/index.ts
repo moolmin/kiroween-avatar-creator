@@ -18,6 +18,7 @@ const svgFiles = [
   'capes-02.png',
   'capes-03.png',
   'capes-04.png',
+  'capes-05.png',
 ];
 
 // Automatically generate registry from SVG files
