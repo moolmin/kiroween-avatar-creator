@@ -101,9 +101,9 @@ export default function Home() {
       </div>
 
       {/* Mobile Layout (<768px): Bottom Sheet */}
-      <div className="md:hidden flex flex-col h-screen">
+      <div className="md:hidden flex flex-col h-screen overflow-hidden">
         {/* Top - Avatar Preview */}
-        <div className="flex-1 flex flex-col items-center justify-center p-4 min-h-0">
+        <div className="flex-shrink-0 flex flex-col items-center justify-center p-4">
           <section id="avatar-preview" className="w-full max-w-sm" aria-label="Avatar preview">
             <div className="bg-primary-purple rounded-xl aspect-square overflow-hidden">
               <ErrorBoundary>
@@ -116,14 +116,14 @@ export default function Home() {
           </section>
 
           {/* Action Buttons */}
-          <nav className="flex gap-3 w-full max-w-sm mt-6 justify-center" aria-label="Avatar actions">
+          <nav className="flex gap-3 w-full max-w-sm mt-6 justify-center sm:block hidden" aria-label="Avatar actions">
             <RandomButton />
           </nav>
         </div>
 
         {/* Bottom - Tabbed Customization Panel */}
-        <aside className="bg-white shadow-2xl rounded-t-3xl max-h-[60vh] overflow-hidden border-t-4 border-halloween-orange-500" aria-label="Customization panel">
-          <TabbedCustomizationPanel svgRef={canvasRef} />
+        <aside className="bg-white shadow-2xl rounded-t-3xl flex-1 flex flex-col border-t-4 min-h-0 overflow-hidden" aria-label="Customization panel">
+          <TabbedCustomizationPanel svgRef={canvasRef} className="h-full flex flex-col" />
         </aside>
       </div>
     </main>

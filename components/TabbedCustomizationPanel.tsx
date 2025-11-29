@@ -13,6 +13,7 @@ import { useAvatarStore } from '@/lib/avatarStore';
 import { getCategoryOptions } from '@/lib/componentRegistry';
 import { ComponentRegistryEntry } from '@/lib/types';
 import ExportButton from '@/components/ExportButton';
+import RandomButton from '@/components/controls/RandomButton';
 
 interface Tab {
   id: string;
@@ -38,7 +39,7 @@ const NoneComponent = () => null;
 
 export default function TabbedCustomizationPanel({ className = '', svgRef }: CustomizationPanelProps) {
   const [activeTab, setActiveTab] = useState<string>('eyes');
-  const { config, updateConfig, randomize } = useAvatarStore();
+  const { config, updateConfig } = useAvatarStore();
 
   const renderOptionButton = (category: string, option: ComponentRegistryEntry, isNoneOption: boolean = false) => {
     // Map plural category names to singular config keys
@@ -100,7 +101,7 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
     const isOptionalCategory = ['hats', 'accessories', 'capes'].includes(activeTab);
     
     return (
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 p-4">
+      <>
         {/* Add "none" option for optional categories */}
         {isOptionalCategory && (
           renderOptionButton(activeTab, { id: 'none', label: 'None', component: NoneComponent }, true)
@@ -110,14 +111,14 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
           .filter(option => option.id !== 'none')
           .map((option) => renderOptionButton(activeTab, option, false))
         }
-      </div>
+      </>
     );
   };
 
   return (
-    <div className={`bg-white overflow-hidden ${className}`}>
+    <div className={`bg-white flex flex-col ${className}`}>
       {/* Header */}
-      <div className="px-6 py-4 bg-primary-purple">
+      <div className="px-6 py-4 bg-primary-purple flex-shrink-0">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 20 24" fill="none">
@@ -126,18 +127,31 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
               <path d="M15.0318 10.4413C14.0423 10.4413 13.8945 9.25893 13.8945 8.55407C13.8945 7.91791 14.0086 7.4124 14.2245 7.09197C14.4144 6.81003 14.6861 6.66699 15.0318 6.66699C15.3774 6.66699 15.6739 6.81228 15.8831 7.09892C16.1214 7.42554 16.2474 7.92861 16.2474 8.55407C16.2474 9.73591 15.793 10.4413 15.0319 10.4413H15.0318Z" fill="black" />
             </svg>
             <div className="relative h-6 sm:h-8 w-auto flex items-center">
+              {/* Mobile logo */}
+              <Image 
+                src="/kiroween-avatar-mobile.png" 
+                alt="Kiroween Avatar" 
+                width={300}
+                height={40}
+                className="!h-12 !sm:h-8 w-auto object-contain md:hidden"
+                priority
+              />
+              {/* Desktop logo */}
               <Image 
                 src="/kiroween-avatar.png" 
                 alt="Kiroween Avatar" 
                 width={300}
                 height={40}
-                className="!h-6 !sm:h-8 w-auto object-contain"
+                className="!h-6 !sm:h-8 w-auto object-contain hidden md:block"
                 priority
               />
             </div>
           </div>
           {svgRef && (
-            <div>
+            <div className="flex items-center gap-2">
+              <div className="md:hidden">
+                <RandomButton />
+              </div>
               <ExportButton svgRef={svgRef} />
             </div>
           )}
@@ -145,7 +159,7 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex bg-gray-50">
+      <div className="flex bg-gray-50 flex-shrink-0">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -167,8 +181,10 @@ export default function TabbedCustomizationPanel({ className = '', svgRef }: Cus
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 h-[500px] sm:h-[550px] overflow-y-auto bg-white">
-        {renderTabContent()}
+      <div className="flex-1 overflow-y-auto bg-white min-h-0 p-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 pb-4">
+          {renderTabContent()}
+        </div>
       </div>
     </div>
   );

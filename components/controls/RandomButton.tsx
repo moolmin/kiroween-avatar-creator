@@ -26,12 +26,12 @@ export default function RandomButton() {
   return (
     <button
       onClick={handleRandomize}
-      className="px-6 py-3 flex items-center justify-center gap-3 group bg-transparent border-2 border-black text-black transition-all duration-250 rounded-lg font-medium"
+      className="px-3 py-2 md:px-6 md:py-3 flex items-center justify-center gap-3 group bg-transparent border-2 border-white md:border-black text-white md:text-black transition-all duration-250 rounded-xl md:rounded-lg font-medium"
       aria-label="Generate random avatar with random eyes, hat, cape, accessory, and background"
       title="Click to randomize all avatar options"
     >
       <svg
-        className={`h-6 w-6 transition-transform duration-250 ${isRandomizing ? 'rotate-180' : 'group-hover:rotate-180'}`}
+        className={`h-5 w-5 md:h-6 md:w-6 transition-transform duration-250 ${isRandomizing ? 'rotate-180' : 'group-hover:rotate-180'}`}
         viewBox="0 0 20 20"
         fill="currentColor"
         aria-hidden="true"
@@ -42,7 +42,7 @@ export default function RandomButton() {
           clipRule="evenodd"
         />
       </svg>
-      <span className="text-base font-semibold">Random</span>
+      <span className="hidden md:block text-base font-semibold">Random</span>
     </button>
   );
 }
