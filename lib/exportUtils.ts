@@ -55,58 +55,60 @@ async function embedImagesInSvg(svgElement: SVGSVGElement): Promise<SVGSVGElemen
  * @throws Error if export fails
  */
 export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void> {
-  try {
-    // Wait a bit to ensure all SVG content is fully rendered
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
-    // Create a temporary container for rendering
-    const container = document.createElement('div');
-    container.style.width = '1024px';
-    container.style.height = '1024px';
-    container.style.position = 'absolute';
-    container.style.left = '-9999px';
-    container.style.top = '0';
-    container.style.background = 'transparent';
-    
-    // Clone the SVG and embed all external images as base64
-    const clonedSvg = await embedImagesInSvg(svgElement);
-    clonedSvg.setAttribute('width', '1024');
-    clonedSvg.setAttribute('height', '1024');
-    clonedSvg.style.width = '1024px';
-    clonedSvg.style.height = '1024px';
-    
-    container.appendChild(clonedSvg);
-    document.body.appendChild(container);
-    
+  // Check if mobile device first
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // For mobile: Simple approach - just open current canvas in new window
     try {
-      // Wait for any dynamic content to load
+      // Wait a bit to ensure all SVG content is fully rendered
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Create a temporary container for rendering
+      const container = document.createElement('div');
+      container.style.width = '1024px';
+      container.style.height = '1024px';
+      container.style.position = 'fixed';
+      container.style.left = '-9999px';
+      container.style.top = '0';
+      container.style.background = 'transparent';
+      
+      // Clone the SVG and embed all external images as base64
+      const clonedSvg = await embedImagesInSvg(svgElement);
+      clonedSvg.setAttribute('width', '1024');
+      clonedSvg.setAttribute('height', '1024');
+      clonedSvg.style.width = '1024px';
+      clonedSvg.style.height = '1024px';
+      
+      container.appendChild(clonedSvg);
+      document.body.appendChild(container);
+      
+      // Wait for render
       await new Promise(resolve => setTimeout(resolve, 200));
       
-      // Convert to canvas with transparent background
+      // Convert to canvas
       const canvas = await html2canvas(container, {
-        backgroundColor: null, // Transparent background
-        scale: 2, // Higher quality
+        backgroundColor: null,
+        scale: 2,
         width: 1024,
         height: 1024,
         logging: false,
-        useCORS: true, // Enable CORS for external resources
-        allowTaint: true, // Allow tainting the canvas with cross-origin images
+        useCORS: true,
+        allowTaint: true,
       });
       
-      // Generate filename with timestamp pattern
-      const timestamp = Date.now();
-      const filename = `kiroween-avatar-${timestamp}.png`;
+      // Clean up container
+      document.body.removeChild(container);
       
-      // Check if mobile device
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      // Get data URL
+      const dataUrl = canvas.toDataURL('image/png', 1.0);
+      const filename = `kiroween-avatar-${Date.now()}.png`;
       
-      if (isMobile) {
-        // For mobile: Directly open in new window
-        const dataUrl = canvas.toDataURL('image/png', 1.0);
-        const newWindow = window.open('', '_blank');
-        
-        if (newWindow) {
-          newWindow.document.write(`
+      // Open in new tab with a simple approach
+      const newTab = window.open('about:blank', '_blank');
+      if (newTab) {
+        setTimeout(() => {
+          newTab.document.write(`
             <!DOCTYPE html>
             <html>
               <head>
@@ -148,26 +150,70 @@ export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void
               </body>
             </html>
           `);
-          newWindow.document.close();
-        }
+          newTab.document.close();
+        }, 100);
       } else {
-        // Desktop: Original download method
+        // If popup blocked, show alert
+        alert('Please allow popups to save the image');
+      }
+    } catch (error) {
+      console.error('Mobile export failed:', error);
+      // Fallback: try to open data URL directly
+      window.open(dataUrl, '_blank');
+    }
+  } else {
+    // Desktop: Keep original method
+    try {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      const container = document.createElement('div');
+      container.style.width = '1024px';
+      container.style.height = '1024px';
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      container.style.top = '0';
+      container.style.background = 'transparent';
+      
+      const clonedSvg = await embedImagesInSvg(svgElement);
+      clonedSvg.setAttribute('width', '1024');
+      clonedSvg.setAttribute('height', '1024');
+      clonedSvg.style.width = '1024px';
+      clonedSvg.style.height = '1024px';
+      
+      container.appendChild(clonedSvg);
+      document.body.appendChild(container);
+      
+      try {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        const canvas = await html2canvas(container, {
+          backgroundColor: null,
+          scale: 2,
+          width: 1024,
+          height: 1024,
+          logging: false,
+          useCORS: true,
+          allowTaint: true,
+        });
+        
+        const timestamp = Date.now();
+        const filename = `kiroween-avatar-${timestamp}.png`;
         const dataUrl = canvas.toDataURL('image/png', 1.0);
+        
         const link = document.createElement('a');
         link.href = dataUrl;
         link.download = filename;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+      } finally {
+        document.body.removeChild(container);
       }
-    } finally {
-      // Clean up temporary container
-      document.body.removeChild(container);
+    } catch (error) {
+      console.error('PNG export failed:', error);
+      throw new Error(
+        `Failed to export avatar as PNG: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
-  } catch (error) {
-    console.error('PNG export failed:', error);
-    throw new Error(
-      `Failed to export avatar as PNG: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
   }
 }
