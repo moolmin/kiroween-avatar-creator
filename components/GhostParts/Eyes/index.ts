@@ -21,6 +21,11 @@ const svgFiles = [
   'eyes-05.png',
   'eyes-06.png',
   'eyes-07.png',
+  'eyes-08.png',
+  'eyes-09.png',
+  'eyes-10.png',
+  'eyes-12.png',
+  'eyes-13.png',
 ];
 
 // Automatically generate registry from SVG files

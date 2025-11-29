@@ -63,10 +63,35 @@ export const svgTransforms: SVGTransformConfig = {
       translateY: 800,
     },
     'eyes-07': {
-       scale: 0.3,
+      scale: 0.3,
       translateX: 1540,
       translateY: 800,
     },
+    'eyes-08': {
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
+    },
+    'eyes-09': {
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
+    },
+    'eyes-10': {
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
+    },
+    'eyes-12': {
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
+    },
+    'eyes-13': {
+      scale: 0.26,
+      translateX: 1980,
+      translateY: 1000,
+    }
   },
 
   // Hats 카테고리
@@ -179,6 +204,21 @@ export const svgTransforms: SVGTransformConfig = {
       translateX: 500,
       translateY: 240,
     },
+    'accessories-11': {
+      scale: 0.45,
+      translateX: 1400,
+      translateY: 1200,
+    },
+    'accessories-12': {
+      scale: 0.26,
+      translateX: 1860,
+      translateY: 1700,
+    },
+    'accessories-13': {
+      scale: 0.25,
+      translateX: 1940,
+      translateY: 1720,
+    }, 
   },
 
   // Backgrounds 카테고리
