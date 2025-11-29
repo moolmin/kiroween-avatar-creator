@@ -33,7 +33,7 @@ export default function Home() {
           // Preload the default ghost body
           fetch('/ghost-parts/kiro-body.svg'),
           preloadCategorySvgs('eyes', ['eyes-01.svg', 'eyes-02.svg', 'eyes-03.svg', 'eyes-04.svg', 'eyes-06.svg', 'eyes-07.svg', 'eyes-08.svg']),
-          preloadCategorySvgs('hats', ['witch-hat.svg', 'pumpkin-hat.svg', 'none.svg']),
+          preloadCategorySvgs('hats', ['hat-01.svg', 'hat-02.svg', 'hat-03.svg']),
           preloadCategorySvgs('capes', ['white-cape.svg', 'purple-cape.svg', 'black-cape.svg', 'capes-01.svg']),
           preloadCategorySvgs('accessories', ['none.svg', 'wand.svg', 'pumpkin-basket.svg', 'candy.svg']),
           preloadCategorySvgs('backgrounds', ['sparkles.svg', 'moon.svg', 'none.svg']),

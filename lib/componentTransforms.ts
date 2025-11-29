@@ -76,15 +76,20 @@ export const svgTransforms: SVGTransformConfig = {
 
   // Hats 카테고리
   hats: {
-    'witch-hat': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+    'hat-01': {
+      scale: 0.4,
+      translateX: 1100,
+      translateY: -20,
     },
-    'pumpkin-hat': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+    'hat-02': {
+      scale: 0.34,
+      translateX: 400,
+      translateY: -120,
+    },
+    'hat-03': {
+      scale: 0.34,
+      translateX: 400,
+      translateY: -138,
     },
   },
 

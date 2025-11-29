@@ -14,9 +14,9 @@ import { createSvgRegistryFromFiles } from '@/lib/svgLoader';
 
 // List all SVG files in the hats category
 const svgFiles = [
-  'witch-hat.svg',
-  'pumpkin-hat.svg',
-  'none.svg',
+  'hat-01.svg',
+  'hat-02.svg',
+  'hat-03.svg',
 ];
 
 // Automatically generate registry from SVG files
