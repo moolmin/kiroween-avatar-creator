@@ -100,7 +100,18 @@ export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void
       // Convert canvas to blob and trigger download
       canvas.toBlob((blob) => {
         if (blob) {
-          download(blob, filename, 'image/png');
+          // Use native download method for better mobile support
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = filename;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          // Clean up the object URL after a delay
+          setTimeout(() => URL.revokeObjectURL(url), 100);
         } else {
           throw new Error('Failed to create PNG blob');
         }
