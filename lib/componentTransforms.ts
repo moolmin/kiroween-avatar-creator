@@ -156,9 +156,24 @@ export const svgTransforms: SVGTransformConfig = {
       translateY: 170,
     },
     'capes-05': {
-       scale: 0.84,
+      scale: 0.84,
       translateX: 110,
       translateY: 280,
+    },
+    'capes-06': {
+      scale: 0.93,
+      translateX: 56,
+      translateY: 214,
+    },
+    'capes-07': {
+      scale: 0.91,
+      translateX: 58,
+      translateY: 250,
+    },
+    'capes-08': {
+      scale: 0.91,
+      translateX: 60,
+      translateY: 250,
     },
   },
 
