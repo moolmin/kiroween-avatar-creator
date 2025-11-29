@@ -100,18 +100,27 @@ export async function exportAvatarAsPNG(svgElement: SVGSVGElement): Promise<void
       // Convert canvas to blob and trigger download
       canvas.toBlob((blob) => {
         if (blob) {
-          // Use native download method for better mobile support
           const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = filename;
-          link.style.display = 'none';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          
+          // Check if mobile device
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          
+          if (isMobile) {
+            // On mobile, open image in new tab for long-press save
+            window.open(url, '_blank');
+          } else {
+            // On desktop, trigger download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
           
           // Clean up the object URL after a delay
-          setTimeout(() => URL.revokeObjectURL(url), 100);
+          setTimeout(() => URL.revokeObjectURL(url), 5000);
         } else {
           throw new Error('Failed to create PNG blob');
         }
