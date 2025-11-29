@@ -99,7 +99,7 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
     return (
       <svg
         ref={ref}
-        viewBox="0 0 1024 1024"
+        viewBox="-64 -64 1152 1152"
         preserveAspectRatio="xMidYMid meet"
         className={className}
         xmlns="http://www.w3.org/2000/svg"
@@ -146,11 +146,17 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
         )}
 
         {/* Layer 5: Hat */}
-        {HatComponent && config.hat && (
+        {config.hat && (
           <SVGComponentErrorBoundary componentName={`hat-${config.hat}`}>
-            <g transform={transformToString(getSVGTransform('hats', config.hat))}>
-              <HatComponent />
-            </g>
+            <image
+              href={`/ghost-parts/hats/${config.hat}.png`}
+              x="0"
+              y="0"
+              width="1024"
+              height="1024"
+              preserveAspectRatio="xMidYMid meet"
+              transform={transformToString(getSVGTransform('hats', config.hat))}
+            />
           </SVGComponentErrorBoundary>
         )}
 

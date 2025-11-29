@@ -33,58 +33,58 @@ export const svgTransforms: SVGTransformConfig = {
   // Eyes 카테고리
   eyes: {
     'eyes-01': {
-     scale: 0.3,
-      translateX: 1600,
-      translateY: 1000,
+      scale: 0.24,
+      translateX: 2040,
+      translateY: 1180,
     },
     'eyes-02': {
-      scale: 0.3,
-      translateX: 1600,
-      translateY: 1000,
+      scale: 0.24,
+      translateX: 2040,
+      translateY: 1180,
     },
     'eyes-03': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 860,
     },
     'eyes-04': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
     },
     'eyes-05': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+      scale: 0.25,
+      translateX: 1940,
+      translateY: 1100,
     },
     'eyes-06': {
-      scale: 0.24,
-      translateX: 1940,
-      translateY: 1200,
+      scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
     },
     'eyes-07': {
-      scale: 1.0,
-      translateX: 0,
-      translateY: 0,
+       scale: 0.3,
+      translateX: 1540,
+      translateY: 800,
     },
   },
 
   // Hats 카테고리
   hats: {
     'hat-01': {
-      scale: 0.4,
+       scale: 0.4,
       translateX: 1100,
-      translateY: -20,
+      translateY: -300,
     },
     'hat-02': {
-      scale: 0.34,
-      translateX: 400,
-      translateY: -120,
+      scale: 1.0,
+      translateX: 0,
+      translateY: 0,
     },
     'hat-03': {
-      scale: 0.34,
-      translateX: 400,
-      translateY: -138,
+      scale: 1.0,
+      translateX: 0,
+      translateY: 0,
     },
   },
 

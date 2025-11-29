@@ -48,8 +48,8 @@ export default function TabbedCustomizationPanel({ className = '' }: Customizati
     const isSelected = isNoneOption 
       ? (!config[configKey] || config[configKey] === 'none' || config[configKey] === null)
       : config[configKey] === option.id;
-    // Use PNG for eyes, SVG for others
-    const fileExtension = category === 'eyes' ? 'png' : 'svg';
+    // Use PNG for eyes and hats, SVG for others
+    const fileExtension = (category === 'eyes' || category === 'hats') ? 'png' : 'svg';
     const imagePath = `/ghost-parts/${category}/${option.id}.${fileExtension}`;
     
     return (
