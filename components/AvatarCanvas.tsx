@@ -10,9 +10,9 @@
  * 2. Ghost Body
  * 3. Eyes
  * 4. Hat
- * 5. Accessory (except 07, 09, 10)
+ * 5. Accessory (except 07, 09, 10, 11)
  * 6. Cape
- * 7. Top Accessories (07, 09, 10) - Top Layer
+ * 7. Top Accessories (07, 09, 10, 11) - Top Layer
  * 
  * Requirements: 1.1, 2.1, 3.1, 4.1, 5.1, 11.2
  */
@@ -161,8 +161,8 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 5: Accessory (except 07, 09, 10) */}
-        {config.accessory && !['accessories-07', 'accessories-09', 'accessories-10'].includes(config.accessory) && (
+        {/* Layer 5: Accessory (except 07, 09, 10, 11) */}
+        {config.accessory && !['accessories-07', 'accessories-09', 'accessories-10', 'accessories-11'].includes(config.accessory) && (
           <SVGComponentErrorBoundary componentName={`accessory-${config.accessory}`}>
             <image
               href={`/ghost-parts/accessories/${config.accessory}.png`}
@@ -191,8 +191,8 @@ export const AvatarCanvas = forwardRef<SVGSVGElement, AvatarCanvasProps>(
           </SVGComponentErrorBoundary>
         )}
 
-        {/* Layer 7: Top Accessories (07, 09, 10) - Top Layer */}
-        {config.accessory && ['accessories-07', 'accessories-09', 'accessories-10'].includes(config.accessory) && (
+        {/* Layer 7: Top Accessories (07, 09, 10, 11) - Top Layer */}
+        {config.accessory && ['accessories-07', 'accessories-09', 'accessories-10', 'accessories-11'].includes(config.accessory) && (
           <SVGComponentErrorBoundary componentName={`accessory-${config.accessory}`}>
             <image
               href={`/ghost-parts/accessories/${config.accessory}.png`}
