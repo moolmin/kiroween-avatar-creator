@@ -10,6 +10,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import EmblaCarousel from '@/components/EmblaCarousel';
+import FeatureCard from '@/components/FeatureCard';
 
 export default function Home() {
   return (
@@ -53,9 +54,10 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-[1280px] w-full">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-rounded">
+        <div className="mx-auto max-w-[1100px] w-full mt-8">
+          {/* Mobile: Center layout */}
+          <div className="text-center lg:hidden">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 font-rounded">
               Create Your
               <span className="block text-primary-purple">Kiroween Avatar</span>
             </h1>
@@ -77,17 +79,98 @@ export default function Home() {
 
             {/* Avatar Examples */}
             <div className="mt-12 sm:mt-16">
-              <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-8">
-                Avatar Examples
-              </h2>
               <EmblaCarousel />
-              <p className="text-sm text-gray-600 mt-8 text-center">
-                Get inspired by these example styles, then create your own unique avatar!
+            </div>
+          </div>
+
+          {/* Desktop: Left-right layout */}
+          <div className="hidden lg:flex lg:items-center lg:justify-between lg:gap-8">
+            {/* Left side - Text content */}
+            <div className="text-left flex-1">
+              <h1 className="text-5xl xl:text-6xl font-bold text-gray-900 mb-6 font-rounded">
+                Create Your
+                <span className="block text-primary-purple">Kiroween Avatar</span>
+              </h1>
+              
+              <p className="text-xl text-gray-700 mb-12">
+                Design Kiroween avatar with easy-to-use customization tools. Mix and match to create your spooky Kiro.
               </p>
+
+              {/* CTA Button */}
+              <Link 
+                href="/maker" 
+                className="inline-flex items-center px-8 py-4 bg-primary-purple text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-300"
+              >
+                Start Creating
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Right side - Avatar Examples */}
+            <div className="flex-shrink-0">
+              <EmblaCarousel />
             </div>
           </div>
         </div>
       </section>
+
+      {/* Features Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1100px] w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4">
+            <FeatureCard
+              icon={
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1V9a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V4a1 1 0 011-1h3a1 1 0 001-1z" />
+                </svg>
+              }
+              title="Fully Customizable"
+              description="Mix and match from dozens of unique ghost parts to create your perfect spooky avatar"
+            />
+
+            <FeatureCard
+              icon={
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14-7H5m14 14H5" />
+                </svg>
+              }
+              title="Multiple Elements"
+              description="Choose from eyes, hats, capes, accessories, and backgrounds for endless combinations"
+            />
+
+            <FeatureCard
+              icon={
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              }
+              title="Instant Download"
+              description="Export your finished avatar as high-quality PNG with just one click"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div className="mx-auto max-w-[1280px] w-full">
+          <div className="text-center">
+            <p className="text-gray-600 text-sm">
+              Made with ❤️ by{' '}
+              <a 
+                href="https://github.com/moolmin" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-purple font-medium border-b-2 border-dashed border-primary-purple hover:text-purple-700 hover:border-purple-700 transition-colors"
+              >
+                moolmin
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
