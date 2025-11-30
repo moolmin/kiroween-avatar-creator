@@ -1,66 +1,18 @@
 'use client';
 
 import React, { useCallback } from 'react';
+import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-// Atom-like logo component inspired by Embla Carousel's logotype
-const AtomLogo = ({ className = "w-16 h-16" }) => (
-  <svg className={className} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Nucleus */}
-    <circle cx="50" cy="50" r="8" fill="currentColor" className="opacity-80"/>
-    
-    {/* Electron orbits */}
-    <ellipse cx="50" cy="50" rx="25" ry="15" stroke="currentColor" strokeWidth="2" fill="none" className="opacity-60"/>
-    <ellipse cx="50" cy="50" rx="25" ry="15" stroke="currentColor" strokeWidth="2" fill="none" className="opacity-60" transform="rotate(60 50 50)"/>
-    <ellipse cx="50" cy="50" rx="25" ry="15" stroke="currentColor" strokeWidth="2" fill="none" className="opacity-60" transform="rotate(120 50 50)"/>
-    
-    {/* Electrons */}
-    <circle cx="75" cy="50" r="3" fill="currentColor" className="opacity-90">
-      <animateTransform
-        attributeName="transform"
-        attributeType="XML"
-        type="rotate"
-        from="0 50 50"
-        to="360 50 50"
-        dur="3s"
-        repeatCount="indefinite"
-      />
-    </circle>
-    <circle cx="35" cy="65" r="3" fill="currentColor" className="opacity-90">
-      <animateTransform
-        attributeName="transform"
-        attributeType="XML"
-        type="rotate"
-        from="60 50 50"
-        to="420 50 50"
-        dur="4s"
-        repeatCount="indefinite"
-      />
-    </circle>
-    <circle cx="65" cy="35" r="3" fill="currentColor" className="opacity-90">
-      <animateTransform
-        attributeName="transform"
-        attributeType="XML"
-        type="rotate"
-        from="120 50 50"
-        to="480 50 50"
-        dur="5s"
-        repeatCount="indefinite"
-      />
-    </circle>
-  </svg>
-);
-
-// Example data with atom illustrations
+// Example data with real avatar images
 const avatarExamples = [
-  { id: 1, name: 'Classic Ghost', description: 'Traditional spooky design' },
-  { id: 2, name: 'Witch Ghost', description: 'Magical and mysterious' },
-  { id: 3, name: 'Friendly Ghost', description: 'Cute and approachable' },
-  { id: 4, name: 'Cool Ghost', description: 'Hip and trendy style' },
-  { id: 5, name: 'Party Ghost', description: 'Ready for Halloween fun' },
-  { id: 6, name: 'Royal Ghost', description: 'Elegant and sophisticated' },
-  { id: 7, name: 'Tech Ghost', description: 'Modern and futuristic' },
+  { id: 1, src: '/examples/avatar1.png', alt: 'Avatar example 1' },
+  { id: 2, src: '/examples/avatar2.png', alt: 'Avatar example 2' },
+  { id: 3, src: '/examples/avatar3.png', alt: 'Avatar example 3' },
+  { id: 4, src: '/examples/avatar4.png', alt: 'Avatar example 4' },
+  { id: 5, src: '/examples/avatar5.png', alt: 'Avatar example 5' },
+  { id: 6, src: '/examples/avatar6.png', alt: 'Avatar example 6' },
 ];
 
 export default function EmblaCarousel() {
@@ -83,19 +35,24 @@ export default function EmblaCarousel() {
   }, [emblaApi]);
 
   return (
-    <div className="relative max-w-md mx-auto">
+    <div className="relative w-full max-w-sm mx-auto">
       {/* Carousel viewport */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {avatarExamples.map((example) => (
             <div
               key={example.id}
-              className="flex-[0_0_100%] min-w-0"
+              className="flex-[0_0_100%] min-w-0 px-2"
             >
-              <div className="bg-primary-purple/10 rounded-xl border-2 border-dashed border-primary-purple/30 p-8 text-center hover:bg-primary-purple/15 transition-colors duration-300 mx-2">
-                <AtomLogo className="w-20 h-20 text-primary-purple/70 mx-auto mb-4" />
-                <h3 className="font-semibold text-gray-800 mb-2">{example.name}</h3>
-                <p className="text-sm text-gray-600">{example.description}</p>
+              <div className="relative w-full aspect-square max-w-lg mx-auto min-w-[160px] min-h-[160px] overflow-hidden rounded-lg">
+                <Image 
+                  src={example.src}
+                  alt={example.alt}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 300px"
+                  priority
+                />
               </div>
             </div>
           ))}

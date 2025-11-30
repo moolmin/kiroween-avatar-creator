@@ -92,7 +92,7 @@ export default function Home() {
                 <span className="block text-primary-purple">Kiroween Avatar</span>
               </h1>
               
-              <p className="text-xl text-gray-700 mb-12">
+              <p className="text-xl text-gray-700 mb-12 mr-8">
                 Design Kiroween avatar with easy-to-use customization tools. Mix and match to create your spooky Kiro.
               </p>
 
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 px-4 sm:px-8 lg:px-8">
         <div className="mx-auto max-w-[1100px] w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4">
             <FeatureCard
