@@ -42,7 +42,7 @@ export default function Home() {
                     alt="Kiroween Avatar" 
                     width={300}
                     height={40}
-                    className="h-8 w-auto object-contain hidden md:block"
+                    className="h-6 w-auto object-contain hidden md:block"
                     priority
                   />
                 </div>
