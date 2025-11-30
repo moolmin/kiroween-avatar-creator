@@ -21,9 +21,13 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mono font utility class */
+.font-mono {
+  font-family: var(--font-aws-diatype-mono), 'Courier New', monospace;
 }
 
 /* Modern minimal scrollbar */

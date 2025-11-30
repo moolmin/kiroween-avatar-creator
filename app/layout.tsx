@@ -1,5 +1,39 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+// Local font configurations
+const awsDiatype = localFont({
+  src: [
+    {
+      path: "../public/fonts/AWSDiatype-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/AWSDiatype-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-aws-diatype",
+});
+
+const awsDiatypeMono = localFont({
+  src: [
+    {
+      path: "../public/fonts/AWSDiatypeRoundedSemi-Mono-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/AWSDiatypeRoundedSemi-Mono-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-aws-diatype-mono",
+});
 
 export const metadata: Metadata = {
   title: "Kiroween Avatar Maker",
@@ -21,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${awsDiatype.variable} ${awsDiatypeMono.variable}`}>
+      <body className={awsDiatype.className} style={{fontFamily: 'var(--font-aws-diatype)'}}>{children}</body>
     </html>
   );
 }
