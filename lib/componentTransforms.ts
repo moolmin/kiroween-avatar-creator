@@ -127,9 +127,24 @@ export const svgTransforms: SVGTransformConfig = {
       translateY: -280,
     },
     'hat-06': {
-      scale: 0.7,
-      translateX: 340,
-      translateY: -350,
+      scale: 0.62,
+      translateX: 380,
+      translateY: -354,
+    },
+    'hat-07': {
+      scale: 0.69,
+      translateX: 238,
+      translateY: -348,
+    },
+    'hat-08': {
+      scale: 0.3,
+      translateX: 940,
+      translateY: -380,
+    },
+    'hat-09': {
+      scale: 0.4,
+      translateX: 880,
+      translateY: -320,
     },
   },
 
