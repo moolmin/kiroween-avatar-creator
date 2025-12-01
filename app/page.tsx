@@ -19,7 +19,7 @@ export default function Home() {
       <header className="pt-6 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1280px]">
           <div className="bg-primary-purple rounded-2xl shadow-lg px-6 py-4 sm:px-8 sm:py-6">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 20 24" fill="none" className="flex-shrink-0">
                   <path d="M3.80081 18.5661C1.32306 24.0572 6.59904 25.434 10.4904 22.2205C11.6339 25.8242 15.926 23.1361 17.4652 20.3445C20.8578 14.1915 19.4877 7.91459 19.1361 6.61988C16.7244 -2.20972 4.67055 -2.21852 2.59581 6.6649C2.11136 8.21946 2.10284 9.98752 1.82846 11.8233C1.69011 12.749 1.59258 13.3398 1.23436 14.3135C1.02841 14.8733 0.745043 15.3704 0.299833 16.2082C-0.391594 17.5095 -0.0998802 20.021 3.46397 18.7186V18.7195L3.80081 18.5661Z" fill="white" />
@@ -47,6 +47,16 @@ export default function Home() {
                   />
                 </div>
               </div>
+              
+              {/* Try Kiro Button */}
+              <a
+                href="https://kiro.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-primary-purple text-sm sm:text-base font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-purple"
+              >
+                Try Kiro
+              </a>
             </div>
           </div>
         </div>
