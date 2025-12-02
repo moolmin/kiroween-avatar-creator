@@ -108,6 +108,7 @@ export default function TabbedCustomizationPanel({
 }: CustomizationPanelProps) {
   const [activeTab, setActiveTab] = useState<string>("eyes");
   const { config, updateConfig } = useAvatarStore();
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   const renderOptionButton = (
     category: string,
@@ -270,7 +271,13 @@ export default function TabbedCustomizationPanel({
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => {
+              setActiveTab(tab.id);
+              // Reset scroll to top when changing tabs
+              if (scrollContainerRef.current) {
+                scrollContainerRef.current.scrollTop = 0;
+              }
+            }}
             className={`
               flex-1 px-2 sm:px-6 py-3 sm:py-6 text-sm font-medium transition-all duration-200
               ${
@@ -290,6 +297,7 @@ export default function TabbedCustomizationPanel({
 
       {/* Tab Content */}
       <div
+        ref={scrollContainerRef}
         className="flex-1 overflow-y-auto bg-white min-h-0 p-4"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
