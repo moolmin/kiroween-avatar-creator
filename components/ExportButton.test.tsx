@@ -46,7 +46,7 @@ describe('ExportButton', () => {
     render(<ExportButton svgRef={mockSvgRef} />);
     
     expect(screen.getByRole('button', { name: /export avatar as png/i })).toBeTruthy();
-    expect(screen.getByText('Export PNG')).toBeTruthy();
+    expect(screen.getByText('DOWNLOAD')).toBeTruthy();
   });
 
   it('calls exportAvatarAsPNG when clicked', async () => {
@@ -79,7 +79,7 @@ describe('ExportButton', () => {
 
     // Should show loading state
     await waitFor(() => {
-      expect(screen.getByText('Exporting...')).toBeTruthy();
+      expect(screen.getByText('DOWNLOADING...')).toBeTruthy();
       expect(button.hasAttribute('disabled')).toBe(true);
     });
 
@@ -88,7 +88,7 @@ describe('ExportButton', () => {
     
     // Should return to normal state
     await waitFor(() => {
-      expect(screen.getByText('Export PNG')).toBeTruthy();
+      expect(screen.getByText('DOWNLOAD')).toBeTruthy();
       expect(button.hasAttribute('disabled')).toBe(false);
     });
   });

@@ -40,7 +40,7 @@ describe('Component Registry System', () => {
 
     it('should return component for valid category and ID', () => {
       // Eyes category should have components now
-      const result = getComponent('eyes', 'round-eyes');
+      const result = getComponent('eyes', 'eyes-01');
       expect(result).not.toBeNull();
     });
   });

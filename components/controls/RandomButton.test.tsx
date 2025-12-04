@@ -29,7 +29,7 @@ describe('RandomButton', () => {
     
     const button = screen.getByRole('button', { name: /generate random avatar/i });
     expect(button).toBeDefined();
-    expect(screen.getByText('Randomize')).toBeDefined();
+    expect(screen.getByText('Random')).toBeDefined();
   });
 
   it('updates avatar configuration when clicked', () => {

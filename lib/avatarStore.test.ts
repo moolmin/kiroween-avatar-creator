@@ -13,11 +13,11 @@ describe('Avatar Store', () => {
   beforeEach(() => {
     const { updateConfig } = useAvatarStore.getState();
     updateConfig({
-      eyes: 'round-eyes',
+      eyes: 'eyes-01',
       hat: null,
-      cape: 'white-cape',
+      cape: null,
       accessory: null,
-      background: 'none',
+      background: 'background-00',
     });
   });
 
@@ -26,11 +26,11 @@ describe('Avatar Store', () => {
       const { config } = useAvatarStore.getState();
       
       expect(config).toBeDefined();
-      expect(config.eyes).toBe('round-eyes');
+      expect(config.eyes).toBe('eyes-01');
       expect(config.hat).toBeNull();
-      expect(config.cape).toBe('white-cape');
+      expect(config.cape).toBeNull();
       expect(config.accessory).toBeNull();
-      expect(config.background).toBe('none');
+      expect(config.background).toBe('background-00');
     });
   });
 
@@ -38,10 +38,10 @@ describe('Avatar Store', () => {
     it('should update single property', () => {
       const { updateConfig, config: initialConfig } = useAvatarStore.getState();
       
-      updateConfig({ eyes: 'happy-eyes' });
+      updateConfig({ eyes: 'eyes-02' });
       
       const { config: updatedConfig } = useAvatarStore.getState();
-      expect(updatedConfig.eyes).toBe('happy-eyes');
+      expect(updatedConfig.eyes).toBe('eyes-02');
       expect(updatedConfig.cape).toBe(initialConfig.cape); // Other properties unchanged
     });
 
@@ -49,23 +49,23 @@ describe('Avatar Store', () => {
       const { updateConfig } = useAvatarStore.getState();
       
       updateConfig({
-        eyes: 'happy-eyes',
-        hat: 'witch-hat',
-        cape: 'purple-cape',
+        eyes: 'eyes-02',
+        hat: 'hat-01',
+        cape: 'capes-01',
       });
       
       const { config } = useAvatarStore.getState();
-      expect(config.eyes).toBe('happy-eyes');
-      expect(config.hat).toBe('witch-hat');
-      expect(config.cape).toBe('purple-cape');
+      expect(config.eyes).toBe('eyes-02');
+      expect(config.hat).toBe('hat-01');
+      expect(config.cape).toBe('capes-01');
     });
 
     it('should allow setting nullable properties to null', () => {
       const { updateConfig } = useAvatarStore.getState();
       
       // First set a hat
-      updateConfig({ hat: 'witch-hat' });
-      expect(useAvatarStore.getState().config.hat).toBe('witch-hat');
+      updateConfig({ hat: 'hat-01' });
+      expect(useAvatarStore.getState().config.hat).toBe('hat-01');
       
       // Then remove it
       updateConfig({ hat: null });
@@ -126,20 +126,20 @@ describe('Avatar Store', () => {
       const { updateConfig } = useAvatarStore.getState();
       
       // Perform multiple updates
-      updateConfig({ eyes: 'happy-eyes' });
-      updateConfig({ hat: 'witch-hat' });
-      updateConfig({ cape: 'black-cape' });
-      updateConfig({ accessory: 'wand' });
-      updateConfig({ background: 'moon' });
+      updateConfig({ eyes: 'eyes-02' });
+      updateConfig({ hat: 'hat-01' });
+      updateConfig({ cape: 'capes-01' });
+      updateConfig({ accessory: 'accessories-01' });
+      updateConfig({ background: 'background-01' });
       
       const { config } = useAvatarStore.getState();
       
       // All values should be valid
-      expect(config.eyes).toBe('happy-eyes');
-      expect(config.hat).toBe('witch-hat');
-      expect(config.cape).toBe('black-cape');
-      expect(config.accessory).toBe('wand');
-      expect(config.background).toBe('moon');
+      expect(config.eyes).toBe('eyes-02');
+      expect(config.hat).toBe('hat-01');
+      expect(config.cape).toBe('capes-01');
+      expect(config.accessory).toBe('accessories-01');
+      expect(config.background).toBe('background-01');
     });
   });
 });

@@ -14,7 +14,7 @@ describe('AvatarCanvas', () => {
     const svg = container.querySelector('svg');
     
     expect(svg).toBeTruthy();
-    expect(svg?.getAttribute('viewBox')).toBe('0 0 1024 1024');
+    expect(svg?.getAttribute('viewBox')).toBe('-64 -64 1152 1152');
   });
 
   it('renders with default configuration', () => {
