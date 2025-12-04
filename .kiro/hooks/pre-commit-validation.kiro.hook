@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Pre-commit Validation",
+  "description": "Before committing, this hook runs npm run lint to check code style, npm run build to verify there are no type errors, and if everything passes, suggests an appropriate commit message following conventional commits format.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please perform the following pre-commit validation steps:\n\n1. Run `npm run lint` to validate code style\n2. Run `npm run build` to check for type errors\n3. If there are any issues, explain what needs to be fixed and ask the user to fix them before committing\n4. If everything passes successfully, recommend a concise commit message following conventional commits format (feat:, fix:, refactor:, etc.)\n\nReview the recent file changes in the workspace to understand what was modified, and provide an appropriate commit message that is concise, uses imperative mood, and follows the commit message guidelines."
+  }
+}
